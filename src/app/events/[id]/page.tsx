@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { ButtonLink } from "@/components/ui/button";
 import { notFound } from "next/navigation";
 
 import { mockEvents } from "@/modules/events/mocks/events";
@@ -9,9 +9,7 @@ type EditEventPageProps = {
   params: Promise<{ id: string }>;
 };
 
-export default async function EventEditPage({
-  params,
-}: EditEventPageProps) {
+export default async function EventEditPage({ params }: EditEventPageProps) {
   const { id } = await params;
   const event = mockEvents.find((event) => event.id === id);
 
@@ -30,17 +28,10 @@ export default async function EventEditPage({
           className="mb-6 flex flex-wrap items-center justify-end
             gap-3 rounded-lg border border-gray-200 bg-gray-50 p-4"
         >
-          <Link
-            href="/events"
-            className="inline-flex items-center gap-2
-              rounded-md bg-blue-600 px-4 py-2 text-sm font-medium
-              text-white transition-colors hover:bg-blue-700
-              focus-visible:outline-2 focus-visible:outline-offset-2
-              focus-visible:outline-blue-600"
-          >
+          <ButtonLink href="/events">
             <span aria-hidden="true">←</span>
             Back to list
-          </Link>
+          </ButtonLink>
         </div>
 
         <EventEditForm

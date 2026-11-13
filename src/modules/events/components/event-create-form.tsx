@@ -1,6 +1,8 @@
 "use client";
 
-import Link from "next/link";
+import { Button, ButtonLink } from "@/components/ui/button";
+import { FormFeedback } from "@/components/ui/form-feedback";
+import { EventFormFields } from "./event-form-fields";
 import { useState, type FormEvent } from "react";
 import {
   createEventDtoSchema,
@@ -16,10 +18,6 @@ type EventCreateFormProps = {
 };
 
 const mockApiClient = new MockEventsApiClient(mockEvents);
-
-const inputClassName =
-  "w-full rounded-md border border-gray-300 bg-white px-3 py-2 " +
-  "focus:border-gray-600 focus:outline-none focus:ring-1 focus:ring-gray-600";
 
 export default function EventCreateForm({
   apiClient = mockApiClient,
@@ -78,9 +76,7 @@ export default function EventCreateForm({
       setIsSaved(true);
     } catch (error) {
       setErrors([
-        error instanceof Error
-          ? error.message
-          : "Не удалось создать событие",
+        error instanceof Error ? error.message : "Не удалось создать событие",
       ]);
     } finally {
       setIsSaving(false);
@@ -89,162 +85,21 @@ export default function EventCreateForm({
 
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-6">
-      <fieldset disabled={isSaving} className="space-y-6">
-        <div>
-          <label htmlFor="name" className="mb-2 block font-medium">
-            Название
-          </label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            required
-            maxLength={200}
-            className={inputClassName}
-            defaultValue=""
-          />
-        </div>
+      <EventFormFields disabled={isSaving} />
 
-        <div>
-          <label htmlFor="description" className="mb-2 block font-medium">
-            Описание
-          </label>
-          <textarea
-            id="description"
-            name="description"
-            rows={4}
-            className={`${inputClassName} resize-y`}
-            defaultValue=""
-          />
-        </div>
-
-        <fieldset>
-          <legend className="mb-2 font-medium">Дата события</legend>
-
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-            <div>
-              <label htmlFor="day" className="mb-2 block text-sm">
-                День
-              </label>
-              <input
-                id="day"
-                name="day"
-                type="number"
-                min={1}
-                max={31}
-                step={1}
-                required
-                className={inputClassName}
-                defaultValue=""
-              />
-            </div>
-
-            <div>
-              <label htmlFor="month" className="mb-2 block text-sm">
-                Месяц
-              </label>
-              <input
-                id="month"
-                name="month"
-                type="number"
-                min={1}
-                max={12}
-                step={1}
-                required
-                className={inputClassName}
-                defaultValue=""
-              />
-            </div>
-
-            <div>
-              <label htmlFor="year" className="mb-2 block text-sm">
-                Год (необязательно)
-              </label>
-              <input
-                id="year"
-                name="year"
-                type="number"
-                step={1}
-                className={inputClassName}
-                defaultValue=""
-              />
-            </div>
-          </div>
-        </fieldset>
-
-        <div>
-          <label htmlFor="type" className="mb-2 block font-medium">
-            Тип события
-          </label>
-          <select
-            id="type"
-            name="type"
-            className={inputClassName}
-            defaultValue="birthday"
-          >
-            <option value="birthday">День рождения</option>
-            <option value="other">Другое</option>
-          </select>
-        </div>
-
-        <div>
-          <label htmlFor="recurrence" className="mb-2 block font-medium">
-            Повторение
-          </label>
-          <select
-            id="recurrence"
-            name="recurrence"
-            className={inputClassName}
-            defaultValue="yearly"
-          >
-            <option value="yearly">Ежегодно</option>
-            <option value="none">Без повторения</option>
-          </select>
-        </div>
-
-        <label className="flex cursor-pointer items-center gap-3">
-          <input
-            name="isActive"
-            type="checkbox"
-            defaultChecked
-            className="h-5 w-5 accent-gray-900"
-          />
-          <span>Событие активно</span>
-        </label>
-      </fieldset>
-
-      {errors.length > 0 && (
-        <ul role="alert" className="list-disc space-y-1 pl-5 text-red-700">
-          {errors.map((error, index) => (
-            <li key={index}>{error}</li>
-          ))}
-        </ul>
-      )}
-
-      {isSaved && (
-        <p role="status" className="text-green-700">
-          Событие создано в памяти мока.
-        </p>
-      )}
+      <FormFeedback
+        errors={errors}
+        success={isSaved ? "Событие создано в памяти мока." : undefined}
+      />
 
       <div className="flex items-center gap-3 border-t border-gray-200 pt-6">
-        <button
-          type="submit"
-          disabled={isSaving}
-          className="cursor-pointer rounded-md bg-gray-900 px-4 py-2
-            text-white hover:bg-gray-700 disabled:cursor-not-allowed
-            disabled:opacity-50"
-        >
+        <Button variant="submit" type="submit" disabled={isSaving}>
           {isSaving ? "Создание..." : "Создать"}
-        </button>
+        </Button>
 
-        <Link
-          href="/events"
-          className="rounded-md border border-gray-300 px-4 py-2
-            transition-colors hover:bg-gray-200"
-        >
+        <ButtonLink variant="secondary" href="/events">
           Отмена
-        </Link>
+        </ButtonLink>
       </div>
     </form>
   );

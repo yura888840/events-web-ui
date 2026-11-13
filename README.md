@@ -38,3 +38,51 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## UI component library and Storybook
+
+Run `npm run storybook` and open http://localhost:6006. Use
+`npm run build-storybook` to produce the static catalog in `storybook-static/`.
+Storybook requires Node.js 20.19+ or 22.12+ (Node.js 24 is also supported).
+
+The app and Storybook use the **same production components**. Import components
+from their source modules, never from `*.stories.tsx`:
+
+```tsx
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/form-controls';
+```
+
+- `src/components/ui/`: buttons and navigation links, input/textarea/select/checkbox,
+  controlled switch, and form error/success feedback.
+- `src/modules/events/components/`: shared event fields, event list item, and
+  create/edit form containers. Containers own validation and API calls; the shared
+  fields own the layout used by both forms.
+- `src/components/events-calendar/`: the existing calendar, used directly by the
+  calendar route and its stories.
+
+Stories are colocated with components and include controls, generated docs, disabled
+and populated states, and interaction checks (`play` functions). Form stories use
+injected API stubs, so they do not modify application mock data or contact a backend.
+Calendar stories use a fixed initial month and local fixtures. Storybook imports the
+app's global CSS and compiles Tailwind with its Vite plugin; the application retains
+its existing Turbopack integration.
+
+Before opening a PR, run:
+
+```bash
+npm run lint
+npm run typecheck
+npm run build
+npm run build-storybook
+```
+
+### Existing contracts dependency
+
+This repository expects the exact local package archive at
+`../events-contracts/yura888840-events-contracts-0.1.0.tgz` before `npm ci`.
+Use the archive matching `package-lock.json`. Repacking the contracts repository
+can produce a different checksum; when intentionally updating it, regenerate the
+lockfile using `npm install ../events-contracts/yura888840-events-contracts-0.1.0.tgz`.
+The API client infers `UpdateEventInput` from `updateEventDtoSchema` because the
+current contracts package incorrectly aliases `UpdateEventDto` to the full event.
