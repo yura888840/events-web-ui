@@ -1,5 +1,5 @@
-import type { EventDto, UpdateEventDto } from "@yura888840/events-contracts";
-import type { EventsApiClient } from "../events-api-client";
+import type { CreateEventDto, EventDto } from "@yura888840/events-contracts";
+import type { EventsApiClient, UpdateEventInput } from "../events-api-client";
 
 export class MockEventsApiClient implements EventsApiClient {
   private readonly events: Map<string, EventDto>;
@@ -19,7 +19,7 @@ export class MockEventsApiClient implements EventsApiClient {
     this.events.set(event.id, event);
   }
 
-  async updateEvent(id: string, dto: UpdateEventDto): Promise<void> {
+  async updateEvent(id: string, dto: UpdateEventInput): Promise<void> {
     const existing = this.events.get(id);
 
     if (!existing) {

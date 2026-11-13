@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { EventListItem } from "@/modules/events/components/event-list-item";
 import { useState } from "react";
 import { mockEvents } from "@/modules/events/mocks/events";
 import { useRouter } from "next/navigation";
@@ -11,9 +13,7 @@ export default function EventsPage() {
   function toggleEvent(id: string) {
     setEvents((current) =>
       current.map((event) =>
-        event.id === id
-          ? { ...event, isActive: !event.isActive }
-          : event,
+        event.id === id ? { ...event, isActive: !event.isActive } : event,
       ),
     );
   }
@@ -35,104 +35,23 @@ export default function EventsPage() {
             {/* filters placeholder*/}
           </div>
 
-          <button
-            type="button"
-            onClick={() => router.push("/events/new")}
-            className="inline-flex cursor-pointer items-center gap-2
-              rounded-md bg-blue-600 px-4 py-2 text-sm font-medium
-              text-white transition-colors hover:bg-blue-700
-              focus-visible:outline-2 focus-visible:outline-offset-2
-              focus-visible:outline-blue-600"
-          >
+          <Button type="button" onClick={() => router.push("/events/new")}>
             <span aria-hidden="true">+</span>
             Add new
-          </button>
+          </Button>
         </div>
 
         <ul className="space-y-3">
           {events.map((event) => (
-            <li
+            <EventListItem
               key={event.id}
-              className="flex items-center gap-4 rounded-lg border
-                border-gray-200 p-4 transition-colors
-                hover:bg-gray-200 hover:border-gray-400"
-            >
-              <h2 className="min-w-0 flex-1 break-words font-medium">
-                {event.name}
-              </h2>
-
-              <div className="flex shrink-0 items-center gap-2">
-                <button
-                  type="button"
-                  role="switch"
-                  aria-checked={event.isActive}
-                  aria-label={`Активность события «${event.name}»`}
-                  title={event.isActive ? "Деактивировать" : "Активировать"}
-                  onClick={() => toggleEvent(event.id)}
-                  className={`relative inline-flex h-6 w-11 shrink-0
-                    cursor-pointer items-center rounded-full
-                    transition-colors focus-visible:outline-2
-                    focus-visible:outline-offset-2
-                    focus-visible:outline-blue-600 ${
-                      event.isActive ? "bg-blue-600" : "bg-gray-300"
-                    }`}
-                >
-                  <span
-                    aria-hidden="true"
-                    className={`h-4 w-4 rounded-full bg-white
-                      transition-transform ${
-                        event.isActive ? "translate-x-6" : "translate-x-1"
-                      }`}
-                  />
-                </button>
-                <button
-                    type="button"
-                    aria-label={`Редактировать событие «${event.name}»`}
-                    title="Edit"
-                    onClick={() => router.push(`/events/${encodeURIComponent(event.id)}`)}
-                    className="cursor-pointer rounded-md p-2 text-gray-500
-                    transition-colors hover:bg-red-50 hover:text-red-600
-                    focus-visible:outline-2 focus-visible:outline-red-600"
-                  >
-                  <svg
-                    aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={1.8}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="h-5 w-5"
-                  >
-                    <path d="m16 3 5 5L8 21H3v-5L16 3Z" />
-                    <path d="m14 5 5 5" />
-                  </svg>
-                </button>
-                <button
-                  type="button"
-                  aria-label={`Delete event «${event.name}»`}
-                  title="Удалить"
-                  onClick={() => deleteEvent(event.id)}
-                  className="cursor-pointer rounded-md p-2 text-gray-500
-                    transition-colors hover:bg-red-50 hover:text-red-600
-                    focus-visible:outline-2 focus-visible:outline-red-600"
-                >
-                  <svg
-                    aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={1.8}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="h-5 w-5"
-                  >
-                    <path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15" />
-                    <path d="M10 10v7M14 10v7" />
-                  </svg>
-                </button>
-              </div>
-            </li>
+              event={event}
+              onToggle={() => toggleEvent(event.id)}
+              onEdit={() =>
+                router.push(`/events/${encodeURIComponent(event.id)}`)
+              }
+              onDelete={() => deleteEvent(event.id)}
+            />
           ))}
         </ul>
 
