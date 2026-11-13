@@ -1,21 +1,20 @@
-import {
-  EventsCalendar,
-  type CalendarEvent,
-} from "@/components/events-calendar/EventsCalendar";
+import { AdvancedCalendar } from "@/modules/events/calendar/AdvancedCalendar";
+import { mockEvents } from "@/modules/events/mocks/events";
+import type { CalendarEvent } from "@/components/events-calendar/EventsCalendar";
 
-const events: CalendarEvent[] = [
-  {
-    id: "1",
-    name: "День рождения",
-    description: "Купить подарок",
-    month: 10,
-    day: 24,
-    type: "birthday",
-    recurrence: "yearly",
-    isActive: true,
-  },
-];
+const initialEvents: CalendarEvent[] = mockEvents.map((event) => ({
+  id: event.id,
+  name: event.name,
+  description: event.description,
+  year: event.year,
+  month: event.month,
+  day: event.day,
+  type: event.type,
+  recurrence: event.recurrence,
+  isActive: event.isActive,
+  category: "personal",
+}));
 
-export default function EventsPage() {
-  return <EventsCalendar events={events} />;
+export default function EventsCalendarPage() {
+  return <AdvancedCalendar initialEvents={initialEvents} />;
 }
