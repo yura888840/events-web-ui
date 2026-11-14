@@ -10,7 +10,7 @@ const config: StorybookConfig = {
     config.define = {
       ...config.define,
       "process.env.NEXT_PUBLIC_LOCALE": JSON.stringify(
-        process.env.NEXT_PUBLIC_LOCALE ?? "ru",
+        process.env.NEXT_PUBLIC_LOCALE ?? "en",
       ),
     };
     config.plugins = [...(config.plugins ?? []), tailwindcss()];

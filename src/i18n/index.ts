@@ -3,11 +3,11 @@ import ru from "./messages/ru.json";
 
 export type Locale = "ru" | "en";
 export type MessageKey = keyof typeof en;
-type Parameters = Record<string, string | number>;
+export type TranslationValues = Record<string, string | number>;
 const messages: Record<Locale, Record<MessageKey, string>> = { en, ru };
 
 export function resolveLocale(value?: string): Locale {
-  return value === "en" ? "en" : "ru";
+  return value === "ru" ? "ru" : "en";
 }
 
 // A build-time setting shared by server components, client components and metadata.
@@ -15,7 +15,7 @@ export const locale = resolveLocale(process.env.NEXT_PUBLIC_LOCALE);
 export const intlLocale = locale === "ru" ? "ru-RU" : "en-GB";
 
 export function createTranslator(language: Locale) {
-  return (key: MessageKey, parameters: Parameters = {}): string =>
+  return (key: MessageKey, parameters: TranslationValues = {}): string =>
     messages[language][key].replace(
       /\{(\w+)\}/g,
       (placeholder, name: string) =>
@@ -25,15 +25,15 @@ export function createTranslator(language: Locale) {
     );
 }
 
-export const t = createTranslator(locale);
+export const translate = createTranslator(locale);
 
 export function eventCount(count: number, language: Locale = locale): string {
   const category = new Intl.PluralRules(language).select(count);
   const suffix =
     category === "one" || category === "few" || category === "many"
-      ? category
-      : "other";
-  return createTranslator(language)(`calendar.count.${suffix}`, { count });
+      ? (category.toUpperCase() as "ONE" | "FEW" | "MANY")
+      : "OTHER";
+  return createTranslator(language)(`CALENDAR_COUNT_${suffix}`, { count });
 }
 
 export function formatDate(

@@ -1,6 +1,14 @@
 "use client";
 
-import { t } from "@/i18n";
+import {
+  COMMON_CANCEL,
+  COMMON_SAVE,
+  ERRORS_SAVE,
+  FORM_SAVED,
+  FORM_SAVING,
+} from "@/i18n/tokens";
+import { Translate } from "@/i18n/translate";
+import { translate } from "@/i18n";
 import { validationMessage } from "@/i18n/validation";
 import { Button, ButtonLink } from "@/components/ui/button";
 import { FormFeedback } from "@/components/ui/form-feedback";
@@ -70,7 +78,9 @@ export default function EventEditForm({
       await apiClient.updateEvent(eventId, dto);
       setIsSaved(true);
     } catch (error) {
-      setErrors([error instanceof Error ? error.message : t("errors.save")]);
+      setErrors([
+        error instanceof Error ? error.message : translate(ERRORS_SAVE),
+      ]);
     } finally {
       setIsSaving(false);
     }
@@ -82,16 +92,20 @@ export default function EventEditForm({
 
       <FormFeedback
         errors={errors}
-        success={isSaved ? t("form.saved") : undefined}
+        success={isSaved ? translate(FORM_SAVED) : undefined}
       />
 
       <div className="flex items-center gap-3 border-t border-gray-200 pt-6">
         <Button variant="submit" type="submit" disabled={isSaving}>
-          {isSaving ? t("form.saving") : t("common.save")}
+          {isSaving ? (
+            <Translate token={FORM_SAVING} />
+          ) : (
+            <Translate token={COMMON_SAVE} />
+          )}
         </Button>
 
         <ButtonLink variant="secondary" href="/events">
-          {t("common.cancel")}
+          <Translate token={COMMON_CANCEL} />
         </ButtonLink>
       </div>
     </form>

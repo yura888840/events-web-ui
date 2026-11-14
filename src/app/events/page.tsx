@@ -1,6 +1,7 @@
 "use client";
 
-import { t } from "@/i18n";
+import { EVENTS_ADD, EVENTS_EMPTY, EVENTS_TITLE } from "@/i18n/tokens";
+import { Translate } from "@/i18n/translate";
 import { Button } from "@/components/ui/button";
 import { EventListItem } from "@/modules/events/components/event-list-item";
 import { useState } from "react";
@@ -26,7 +27,9 @@ export default function EventsPage() {
   return (
     <main className="min-h-screen bg-white px-6 py-12 text-gray-900">
       <div className="mx-auto max-w-2xl">
-        <h1 className="mb-6 text-2xl font-semibold">{t("events.title")}</h1>
+        <h1 className="mb-6 text-2xl font-semibold">
+          <Translate token={EVENTS_TITLE} />
+        </h1>
 
         <div
           className="mb-6 flex flex-wrap items-center justify-between
@@ -38,7 +41,7 @@ export default function EventsPage() {
 
           <Button type="button" onClick={() => router.push("/events/new")}>
             <span aria-hidden="true">+</span>
-            {t("events.add")}
+            <Translate token={EVENTS_ADD} />
           </Button>
         </div>
 
@@ -57,7 +60,9 @@ export default function EventsPage() {
         </ul>
 
         {events.length === 0 && (
-          <p className="text-gray-500">{t("events.empty")}</p>
+          <p className="text-gray-500">
+            <Translate token={EVENTS_EMPTY} />
+          </p>
         )}
       </div>
     </main>

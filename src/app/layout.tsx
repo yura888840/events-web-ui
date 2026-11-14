@@ -1,4 +1,5 @@
-import { t, locale } from "@/i18n";
+import { APP_DESCRIPTION, APP_TITLE } from "@/i18n/tokens";
+import { translate, locale } from "@/i18n";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -14,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: t("app.title"),
-  description: t("app.description"),
+  title: translate(APP_TITLE),
+  description: translate(APP_DESCRIPTION),
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

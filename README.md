@@ -89,30 +89,47 @@ current contracts package incorrectly aliases `UpdateEventDto` to the full event
 
 ## Localization
 
-Application copy lives in `src/i18n/messages/ru.json` and `en.json`, grouped by
-semantic key prefixes. Russian is the default. Set `NEXT_PUBLIC_LOCALE=en` before
-starting development, building the app, or running Storybook for English:
+Application copy lives in `src/i18n/messages/en.json` and `ru.json`, using
+uppercase language tokens such as `EVENTS_BACK`. English is the default and the
+fallback for unsupported locale values. Set `NEXT_PUBLIC_LOCALE=ru` before
+starting development, building the app, or running Storybook for Russian:
 
 ```bash
-NEXT_PUBLIC_LOCALE=en npm run dev
-NEXT_PUBLIC_LOCALE=en npm run build
-NEXT_PUBLIC_LOCALE=en npm run storybook
+NEXT_PUBLIC_LOCALE=ru npm run dev
+NEXT_PUBLIC_LOCALE=ru npm run build
+NEXT_PUBLIC_LOCALE=ru npm run storybook
 ```
 
 The locale is a build-time setting: rebuild to change a deployed app's language.
-Unsupported values fall back to Russian. Existing route URLs are unchanged.
-Server components, client components, metadata, and the HTML `lang` attribute use
-the same setting; no provider or extra runtime dependency is required.
+Existing route URLs are unchanged. Server components, client components,
+metadata, and HTML `lang` use the same setting.
 
-Use `t("fields.name")` from `@/i18n` for copy. Add matching keys to **both** JSON
-files. Use named placeholders for complete phrases, for example
-`t("events.editLabel", { name: event.name })`; React escapes the rendered text.
-Use `eventCount(count)` for pluralized totals and `formatDate` for dates. Month
-and weekday names come from `Intl`, with Monday remaining the first calendar day.
-Schema errors are mapped to localized field messages by `validationMessage`.
-API-provided error messages and user-authored event names/descriptions (including
-demo fixtures) are content, not translation keys. Storybook catalog titles and
+Use the declarative `Translate` component in JSX (React's equivalent here of a
+translation pipe):
+
+```tsx
+import { Translate } from '@/i18n/translate';
+import { EVENTS_BACK, EVENTS_EDIT_LABEL } from '@/i18n/tokens';
+
+<Translate token={EVENTS_BACK} />
+<Translate token={EVENTS_EDIT_LABEL} values={{ name: event.name }} />
+```
+
+It renders escaped text without an extra DOM element and works in both server
+and client components. For string-only APIs such as `aria-label`, placeholders,
+metadata, validation, and Storybook queries, use `translate(EVENTS_EDIT_LABEL,
+{ name: event.name })` from `@/i18n`.
+
+Add each token to `src/i18n/tokens.ts` and matching entries to both JSON catalogs.
+Use named placeholders for complete phrases. Use `eventCount(count)` for plurals
+and `formatDate` for dates. Month and weekday names come from `Intl`, with Monday
+remaining the first calendar day. Schema errors are mapped to localized field
+messages by `validationMessage`.
+
+API-provided errors and user-authored event names/descriptions (including demo
+fixtures) are content, not translation tokens. Storybook catalog titles and
 demo-only control copy are development documentation, not application copy.
 
-Run `npm run test:i18n` and `NEXT_PUBLIC_LOCALE=en npm run test:i18n` to check
-catalog parity, placeholders, plural forms, validation, and date headings.
+Run `npm run test:i18n` and `NEXT_PUBLIC_LOCALE=ru npm run test:i18n` to check
+catalog/token parity, interpolation, rendered translations, plural forms,
+validation, and date headings.

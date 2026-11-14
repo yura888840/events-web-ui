@@ -1,4 +1,10 @@
-import { t } from "@/i18n";
+import {
+  FIELDS_DAY,
+  FIELDS_MONTH,
+  FIELDS_NAME,
+  FORM_CREATE,
+} from "@/i18n/tokens";
+import { translate } from "@/i18n";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
 import EventCreateForm from "./event-create-form";
@@ -26,7 +32,7 @@ export const ValidationErrors: Story = {
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
     await userEvent.click(
-      canvas.getByRole("button", { name: t("form.create") }),
+      canvas.getByRole("button", { name: translate(FORM_CREATE) }),
     );
     await expect(canvas.getByRole("alert")).toBeVisible();
     await expect(args.apiClient!.createEvent).not.toHaveBeenCalled();
@@ -36,13 +42,13 @@ export const Saved: Story = {
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
     await userEvent.type(
-      canvas.getByLabelText(t("fields.name")),
+      canvas.getByLabelText(translate(FIELDS_NAME)),
       "Team meeting",
     );
-    await userEvent.type(canvas.getByLabelText(t("fields.day")), "12");
-    await userEvent.type(canvas.getByLabelText(t("fields.month")), "11");
+    await userEvent.type(canvas.getByLabelText(translate(FIELDS_DAY)), "12");
+    await userEvent.type(canvas.getByLabelText(translate(FIELDS_MONTH)), "11");
     await userEvent.click(
-      canvas.getByRole("button", { name: t("form.create") }),
+      canvas.getByRole("button", { name: translate(FORM_CREATE) }),
     );
     await expect(await canvas.findByRole("status")).toBeVisible();
     await expect(args.apiClient!.createEvent).toHaveBeenCalledWith(
@@ -53,7 +59,7 @@ export const Saved: Story = {
         isActive: true,
       }),
     );
-    await expect(canvas.getByLabelText(t("fields.name"))).toHaveValue("");
+    await expect(canvas.getByLabelText(translate(FIELDS_NAME))).toHaveValue("");
   },
 };
 export const ApiFailure: Story = {
@@ -68,18 +74,18 @@ export const ApiFailure: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await userEvent.type(
-      canvas.getByLabelText(t("fields.name")),
+      canvas.getByLabelText(translate(FIELDS_NAME)),
       "Team meeting",
     );
-    await userEvent.type(canvas.getByLabelText(t("fields.day")), "12");
-    await userEvent.type(canvas.getByLabelText(t("fields.month")), "11");
+    await userEvent.type(canvas.getByLabelText(translate(FIELDS_DAY)), "12");
+    await userEvent.type(canvas.getByLabelText(translate(FIELDS_MONTH)), "11");
     await userEvent.click(
-      canvas.getByRole("button", { name: t("form.create") }),
+      canvas.getByRole("button", { name: translate(FORM_CREATE) }),
     );
     await expect(await canvas.findByRole("alert")).toHaveTextContent(
       "Сервис недоступен",
     );
-    await expect(canvas.getByLabelText(t("fields.name"))).toHaveValue(
+    await expect(canvas.getByLabelText(translate(FIELDS_NAME))).toHaveValue(
       "Team meeting",
     );
   },

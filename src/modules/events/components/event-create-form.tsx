@@ -1,6 +1,14 @@
 "use client";
 
-import { t } from "@/i18n";
+import {
+  COMMON_CANCEL,
+  ERRORS_CREATE,
+  FORM_CREATE,
+  FORM_CREATED,
+  FORM_CREATING,
+} from "@/i18n/tokens";
+import { Translate } from "@/i18n/translate";
+import { translate } from "@/i18n";
 import { validationMessage } from "@/i18n/validation";
 import { Button, ButtonLink } from "@/components/ui/button";
 import { FormFeedback } from "@/components/ui/form-feedback";
@@ -73,7 +81,9 @@ export default function EventCreateForm({
       form.reset();
       setIsSaved(true);
     } catch (error) {
-      setErrors([error instanceof Error ? error.message : t("errors.create")]);
+      setErrors([
+        error instanceof Error ? error.message : translate(ERRORS_CREATE),
+      ]);
     } finally {
       setIsSaving(false);
     }
@@ -85,16 +95,20 @@ export default function EventCreateForm({
 
       <FormFeedback
         errors={errors}
-        success={isSaved ? t("form.created") : undefined}
+        success={isSaved ? translate(FORM_CREATED) : undefined}
       />
 
       <div className="flex items-center gap-3 border-t border-gray-200 pt-6">
         <Button variant="submit" type="submit" disabled={isSaving}>
-          {isSaving ? t("form.creating") : t("form.create")}
+          {isSaving ? (
+            <Translate token={FORM_CREATING} />
+          ) : (
+            <Translate token={FORM_CREATE} />
+          )}
         </Button>
 
         <ButtonLink variant="secondary" href="/events">
-          {t("common.cancel")}
+          <Translate token={COMMON_CANCEL} />
         </ButtonLink>
       </div>
     </form>

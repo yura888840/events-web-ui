@@ -1,4 +1,13 @@
-import { t } from "@/i18n";
+import {
+  COMMON_DELETE,
+  COMMON_EDIT,
+  EVENTS_ACTIVATE,
+  EVENTS_DEACTIVATE,
+  EVENTS_DELETE_LABEL,
+  EVENTS_EDIT_LABEL,
+  EVENTS_TOGGLE_LABEL,
+} from "@/i18n/tokens";
+import { translate } from "@/i18n";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 
@@ -25,15 +34,19 @@ export function EventListItem({
       <div className="flex shrink-0 items-center gap-2">
         <Switch
           checked={event.isActive}
-          aria-label={t("events.toggleLabel", { name: event.name })}
-          title={event.isActive ? t("events.deactivate") : t("events.activate")}
+          aria-label={translate(EVENTS_TOGGLE_LABEL, { name: event.name })}
+          title={
+            event.isActive
+              ? translate(EVENTS_DEACTIVATE)
+              : translate(EVENTS_ACTIVATE)
+          }
           onCheckedChange={() => onToggle()}
         />
         <Button
           variant="icon"
           type="button"
-          aria-label={t("events.editLabel", { name: event.name })}
-          title={t("common.edit")}
+          aria-label={translate(EVENTS_EDIT_LABEL, { name: event.name })}
+          title={translate(COMMON_EDIT)}
           onClick={() => onEdit()}
         >
           <svg
@@ -53,8 +66,8 @@ export function EventListItem({
         <Button
           variant="icon"
           type="button"
-          aria-label={t("events.deleteLabel", { name: event.name })}
-          title={t("common.delete")}
+          aria-label={translate(EVENTS_DELETE_LABEL, { name: event.name })}
+          title={translate(COMMON_DELETE)}
           onClick={() => onDelete()}
         >
           <svg

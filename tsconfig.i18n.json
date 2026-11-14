@@ -9,6 +9,6 @@
     "incremental": false,
     "plugins": []
   },
-  "include": ["src/i18n/**/*.ts"],
+  "include": ["src/i18n/**/*.ts", "src/i18n/**/*.tsx"],
   "exclude": ["node_modules"]
 }

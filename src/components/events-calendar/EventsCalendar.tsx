@@ -1,5 +1,55 @@
 "use client";
-import { t, eventCount, formatDate, months, weekdays } from "@/i18n";
+import {
+  APP_AVATAR,
+  APP_BRAND,
+  CALENDAR_ADD,
+  CALENDAR_ADD_ON_DATE,
+  CALENDAR_ALL_DAY,
+  CALENDAR_CHOOSE_MONTH,
+  CALENDAR_CHOOSE_YEAR,
+  CALENDAR_CLEAR_SEARCH,
+  CALENDAR_CONFIRM_DELETE,
+  CALENDAR_CREATE_DIALOG,
+  CALENDAR_DEMO,
+  CALENDAR_DETAILS,
+  CALENDAR_DETAILS_HINT,
+  CALENDAR_EDIT_DIALOG,
+  CALENDAR_EMPTY,
+  CALENDAR_EYEBROW,
+  CALENDAR_INACTIVE,
+  CALENDAR_INACTIVE_SUFFIX,
+  CALENDAR_LABEL,
+  CALENDAR_LIST,
+  CALENDAR_LOADING,
+  CALENDAR_MY_CALENDARS,
+  CALENDAR_NEXT_MONTH,
+  CALENDAR_NEXT_PERIOD,
+  CALENDAR_NOTE,
+  CALENDAR_NOTE_TITLE,
+  CALENDAR_PREVIOUS_MONTH,
+  CALENDAR_PREVIOUS_PERIOD,
+  CALENDAR_RECURRING,
+  CALENDAR_SCHEDULED,
+  CALENDAR_SEARCH,
+  CALENDAR_SHOW_INACTIVE,
+  CALENDAR_SPACE,
+  CALENDAR_TAGLINE,
+  CALENDAR_TITLE,
+  CALENDAR_TODAY,
+  CALENDAR_TODAY_BADGE,
+  CALENDAR_WEEK,
+  CALENDAR_WEEK_START,
+  CALENDAR_WORKSPACE,
+  CATEGORIES_BIRTHDAY,
+  CATEGORIES_PERSONAL,
+  CATEGORIES_WORK,
+  COMMON_CLOSE,
+  COMMON_DELETE,
+  COMMON_EDIT,
+  FIELDS_MONTH,
+} from "@/i18n/tokens";
+import { Translate } from "@/i18n/translate";
+import { translate, eventCount, formatDate, months, weekdays } from "@/i18n";
 import "./EventsCalendar.css";
 import { useState } from "react";
 import { EventEditor } from "@/modules/events/calendar/EventEditor";
@@ -40,9 +90,9 @@ const dateLabel = (d: Date) => formatDate(d, { day: "numeric", month: "long" });
 const kind = (e: CalendarEvent) =>
   e.type === "birthday" ? "birthday" : e.category || "personal";
 const labels = {
-  work: t("categories.work"),
-  personal: t("categories.personal"),
-  birthday: t("categories.birthday"),
+  work: translate(CATEGORIES_WORK),
+  personal: translate(CATEGORIES_PERSONAL),
+  birthday: translate(CATEGORIES_BIRTHDAY),
 };
 export function EventsCalendar({
   events,
@@ -136,22 +186,28 @@ export function EventsCalendar({
           <span className="brand-icon">
             <CalendarDays size={21} />
           </span>
-          {t("app.brand")}
+          <Translate token={APP_BRAND} />
           <span className="brand-dot">.</span>
         </div>
-        <span className="top-title">{t("calendar.tagline")}</span>
+        <span className="top-title">
+          <Translate token={CALENDAR_TAGLINE} />
+        </span>
         <div className="profile">
           <span className="status-dot" />
-          {t("calendar.space")}
-          <span className="avatar">{t("app.avatar")}</span>
+          <Translate token={CALENDAR_SPACE} />
+          <span className="avatar">
+            <Translate token={APP_AVATAR} />
+          </span>
         </div>
       </header>
       <div className="workspace">
         <aside>
-          <div className="side-title">{t("calendar.workspace")}</div>
+          <div className="side-title">
+            <Translate token={CALENDAR_WORKSPACE} />
+          </div>
           <div className="nav-active">
             <CalendarDays size={18} />
-            {t("calendar.title")}
+            <Translate token={CALENDAR_TITLE} />
             <span>01</span>
           </div>
           <div className="mini">
@@ -160,7 +216,7 @@ export function EventsCalendar({
               <div>
                 <button
                   type="button"
-                  aria-label={t("calendar.previousMonth")}
+                  aria-label={translate(CALENDAR_PREVIOUS_MONTH)}
                   onClick={() =>
                     jump(cursor.getFullYear(), cursor.getMonth() - 1)
                   }
@@ -169,7 +225,7 @@ export function EventsCalendar({
                 </button>
                 <button
                   type="button"
-                  aria-label={t("calendar.nextMonth")}
+                  aria-label={translate(CALENDAR_NEXT_MONTH)}
                   onClick={() =>
                     jump(cursor.getFullYear(), cursor.getMonth() + 1)
                   }
@@ -199,7 +255,8 @@ export function EventsCalendar({
           </div>
           <div className="side-section">
             <div className="side-title">
-              {t("calendar.myCalendars")} <SlidersHorizontal size={14} />
+              <Translate token={CALENDAR_MY_CALENDARS} />{" "}
+              <SlidersHorizontal size={14} />
             </div>
             {Object.entries(labels).map(([key, label]) => (
               <label className="filter" key={key}>
@@ -229,19 +286,27 @@ export function EventsCalendar({
           </div>
           <div className="sidebar-note">
             <span className="note-icon">✧</span>
-            <strong>{t("calendar.noteTitle")}</strong>
-            <p>{t("calendar.note")}</p>
+            <strong>
+              <Translate token={CALENDAR_NOTE_TITLE} />
+            </strong>
+            <p>
+              <Translate token={CALENDAR_NOTE} />
+            </p>
           </div>
           <div className="sidebar-bottom">
             <span className="status-dot" />
-            {t("calendar.demo")}
+            <Translate token={CALENDAR_DEMO} />
           </div>
         </aside>
         <main>
           <div className="page-heading">
             <div>
-              <div className="eyebrow">{t("calendar.eyebrow")}</div>
-              <h1>{t("calendar.title")}</h1>
+              <div className="eyebrow">
+                <Translate token={CALENDAR_EYEBROW} />
+              </div>
+              <h1>
+                <Translate token={CALENDAR_TITLE} />
+              </h1>
             </div>
             <div className="calendar-heading-actions">
               <button
@@ -249,20 +314,20 @@ export function EventsCalendar({
                 className="calendar-add-button"
                 onClick={() => setEditor({ date: cursor })}
               >
-                <Plus size={16} /> {t("calendar.add")}
+                <Plus size={16} /> <Translate token={CALENDAR_ADD} />
               </button>
               <label className="search">
                 <Search size={17} />
                 <input
-                  placeholder={t("calendar.search")}
-                  aria-label={t("calendar.search")}
+                  placeholder={translate(CALENDAR_SEARCH)}
+                  aria-label={translate(CALENDAR_SEARCH)}
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                 />
                 {query && (
                   <button
                     type="button"
-                    aria-label={t("calendar.clearSearch")}
+                    aria-label={translate(CALENDAR_CLEAR_SEARCH)}
                     onClick={() => setQuery("")}
                   >
                     <X size={14} />
@@ -278,19 +343,19 @@ export function EventsCalendar({
                 className="today-button"
                 onClick={() => setCursor(today)}
               >
-                {t("calendar.today")}
+                <Translate token={CALENDAR_TODAY} />
               </button>
               <div className="arrows">
                 <button
                   type="button"
-                  aria-label={t("calendar.previousPeriod")}
+                  aria-label={translate(CALENDAR_PREVIOUS_PERIOD)}
                   onClick={() => move(-1)}
                 >
                   <ChevronLeft size={19} />
                 </button>
                 <button
                   type="button"
-                  aria-label={t("calendar.nextPeriod")}
+                  aria-label={translate(CALENDAR_NEXT_PERIOD)}
                   onClick={() => move(1)}
                 >
                   <ChevronRight size={19} />
@@ -310,7 +375,7 @@ export function EventsCalendar({
                 onClick={() => setView("list")}
               >
                 <List size={14} />
-                {t("calendar.list")}
+                <Translate token={CALENDAR_LIST} />
               </button>
               <button
                 type="button"
@@ -318,7 +383,7 @@ export function EventsCalendar({
                 className={view === "week" ? "active" : ""}
                 onClick={() => setView("week")}
               >
-                {t("calendar.week")}
+                <Translate token={CALENDAR_WEEK} />
               </button>
               <button
                 type="button"
@@ -327,7 +392,7 @@ export function EventsCalendar({
                 onClick={() => setView("month")}
               >
                 <LayoutGrid size={14} />
-                {t("fields.month")}
+                <Translate token={FIELDS_MONTH} />
               </button>
             </div>
           </div>
@@ -337,7 +402,7 @@ export function EventsCalendar({
               checked={showInactive}
               onChange={(e) => setShowInactive(e.target.checked)}
             />
-            {t("calendar.showInactive")}
+            <Translate token={CALENDAR_SHOW_INACTIVE} />
           </label>
           <div className="sub-toolbar">
             <span>
@@ -347,7 +412,7 @@ export function EventsCalendar({
             <div className="jump">
               <Calendar size={14} />
               <select
-                aria-label={t("calendar.chooseMonth")}
+                aria-label={translate(CALENDAR_CHOOSE_MONTH)}
                 value={cursor.getMonth()}
                 onChange={(e) =>
                   jump(cursor.getFullYear(), Number(e.target.value))
@@ -360,7 +425,7 @@ export function EventsCalendar({
                 ))}
               </select>
               <input
-                aria-label={t("calendar.chooseYear")}
+                aria-label={translate(CALENDAR_CHOOSE_YEAR)}
                 type="number"
                 min="1"
                 max="9999"
@@ -375,7 +440,9 @@ export function EventsCalendar({
           {view === "list" ? (
             <div className="calendar-list">
               {listedDays.length === 0 ? (
-                <p className="calendar-empty">{t("calendar.empty")}</p>
+                <p className="calendar-empty">
+                  <Translate token={CALENDAR_EMPTY} />
+                </p>
               ) : (
                 listedDays.map((d) => (
                   <section key={d.toISOString()} className="calendar-list-day">
@@ -393,10 +460,14 @@ export function EventsCalendar({
                         className={`calendar-list-event ${kind(e)}`}
                         onClick={() => setSelected({ event: e, date: d })}
                       >
-                        <strong>{e.time || t("calendar.allDay")}</strong>
+                        <strong>
+                          {e.time || <Translate token={CALENDAR_ALL_DAY} />}
+                        </strong>
                         <span>
                           {e.name}
-                          {!e.isActive && t("calendar.inactiveSuffix")}
+                          {!e.isActive && (
+                            <Translate token={CALENDAR_INACTIVE_SUFFIX} />
+                          )}
                         </span>
                         <ArrowUpRight size={14} />
                       </button>
@@ -409,7 +480,7 @@ export function EventsCalendar({
             <div className="calendar-scroll">
               <section
                 className={`calendar ${view}`}
-                aria-label={t("calendar.label")}
+                aria-label={translate(CALENDAR_LABEL)}
               >
                 <div className="weekdays">
                   {weekdays.map((w, i) => (
@@ -440,7 +511,7 @@ export function EventsCalendar({
                         <button
                           type="button"
                           className="calendar-day-create"
-                          aria-label={t("calendar.addOnDate", {
+                          aria-label={translate(CALENDAR_ADD_ON_DATE, {
                             date: dateLabel(d),
                           })}
                           onClick={() => setEditor({ date: d })}
@@ -451,7 +522,9 @@ export function EventsCalendar({
                           {d.getDate()}
                         </span>
                         {same(d, today) && (
-                          <small>{t("calendar.todayBadge")}</small>
+                          <small>
+                            <Translate token={CALENDAR_TODAY_BADGE} />
+                          </small>
                         )}
                       </div>
                       <div className="day-events">
@@ -466,13 +539,17 @@ export function EventsCalendar({
                             <span>
                               {e.time && <b>{e.time} </b>}
                               {e.name}
-                              {!e.isActive && t("calendar.inactiveSuffix")}
+                              {!e.isActive && (
+                                <Translate token={CALENDAR_INACTIVE_SUFFIX} />
+                              )}
                             </span>
                             {view === "week" && (
                               <small>
-                                {e.time
-                                  ? t("calendar.scheduled")
-                                  : t("calendar.allDay")}
+                                {e.time ? (
+                                  <Translate token={CALENDAR_SCHEDULED} />
+                                ) : (
+                                  <Translate token={CALENDAR_ALL_DAY} />
+                                )}
                               </small>
                             )}
                           </button>
@@ -485,16 +562,19 @@ export function EventsCalendar({
             </div>
           )}
           <footer>
-            <span>{t("calendar.weekStart")}</span>
             <span>
-              {t("calendar.detailsHint")} <ArrowUpRight size={13} />
+              <Translate token={CALENDAR_WEEK_START} />
+            </span>
+            <span>
+              <Translate token={CALENDAR_DETAILS_HINT} />{" "}
+              <ArrowUpRight size={13} />
             </span>
           </footer>
         </main>
       </div>
       {!storageReady && (
         <span className="calendar-loading" role="status">
-          {t("calendar.loading")}
+          <Translate token={CALENDAR_LOADING} />
         </span>
       )}
       {editor && (
@@ -510,14 +590,14 @@ export function EventsCalendar({
             aria-modal="true"
             aria-label={
               editor.event
-                ? t("calendar.editDialog")
-                : t("calendar.createDialog")
+                ? translate(CALENDAR_EDIT_DIALOG)
+                : translate(CALENDAR_CREATE_DIALOG)
             }
           >
             <button
               type="button"
               className="close"
-              aria-label={t("common.close")}
+              aria-label={translate(COMMON_CLOSE)}
               onClick={() => setEditor(null)}
             >
               <X size={20} />
@@ -538,7 +618,7 @@ export function EventsCalendar({
             className="event-modal"
             role="dialog"
             aria-modal="true"
-            aria-label={t("calendar.details")}
+            aria-label={translate(CALENDAR_DETAILS)}
             onClick={(e) => e.stopPropagation()}
             onKeyDown={(e) => {
               if (e.key === "Escape") setSelected(null);
@@ -548,7 +628,7 @@ export function EventsCalendar({
               type="button"
               autoFocus
               className="close"
-              aria-label={t("common.close")}
+              aria-label={translate(COMMON_CLOSE)}
               onClick={() => setSelected(null)}
             >
               <X size={20} />
@@ -557,15 +637,21 @@ export function EventsCalendar({
               {labels[kind(selected.event)]}
             </span>
             <h2>{selected.event.name}</h2>
-            {!selected.event.isActive && <p>{t("calendar.inactive")}</p>}
+            {!selected.event.isActive && (
+              <p>
+                <Translate token={CALENDAR_INACTIVE} />
+              </p>
+            )}
             <p className="detail-date">
               <CalendarDays size={18} />
               {dateLabel(selected.date)} {selected.date.getFullYear()} ·{" "}
-              {selected.event.time || t("calendar.allDay")}
+              {selected.event.time || <Translate token={CALENDAR_ALL_DAY} />}
             </p>
             <p>{selected.event.description}</p>
             {selected.event.recurrence === "yearly" && (
-              <p className="recurrence">{t("calendar.recurring")}</p>
+              <p className="recurrence">
+                <Translate token={CALENDAR_RECURRING} />
+              </p>
             )}
             <div className="calendar-detail-actions">
               {onDelete && (
@@ -573,13 +659,13 @@ export function EventsCalendar({
                   type="button"
                   className="calendar-delete-button"
                   onClick={() => {
-                    if (window.confirm(t("calendar.confirmDelete"))) {
+                    if (window.confirm(translate(CALENDAR_CONFIRM_DELETE))) {
                       onDelete(selected.event.id);
                       setSelected(null);
                     }
                   }}
                 >
-                  <Trash2 size={15} /> {t("common.delete")}
+                  <Trash2 size={15} /> <Translate token={COMMON_DELETE} />
                 </button>
               )}
               {onUpdate && (
@@ -591,7 +677,7 @@ export function EventsCalendar({
                     setSelected(null);
                   }}
                 >
-                  <Pencil size={15} /> {t("common.edit")}
+                  <Pencil size={15} /> <Translate token={COMMON_EDIT} />
                 </button>
               )}
               <button
@@ -599,7 +685,7 @@ export function EventsCalendar({
                 className="done"
                 onClick={() => setSelected(null)}
               >
-                {t("common.close")}
+                <Translate token={COMMON_CLOSE} />
               </button>
             </div>
           </section>

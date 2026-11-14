@@ -25,11 +25,11 @@ test("catalogs have identical keys and interpolation parameters", () => {
 test("translations interpolate user content without interpreting it", () => {
   const name = "<img src=x> {count} $&";
   assert.equal(
-    createTranslator("en")("events.editLabel", { name }),
+    createTranslator("en")("EVENTS_EDIT_LABEL", { name }),
     `Edit event “${name}”`,
   );
   assert.equal(
-    createTranslator("ru")("events.editLabel", { name }),
+    createTranslator("ru")("EVENTS_EDIT_LABEL", { name }),
     `Редактировать событие «${name}»`,
   );
 });
@@ -54,16 +54,16 @@ test("event counts follow English and Russian plural rules", () => {
   }
 });
 
-test("locale resolution has a stable Russian fallback", () => {
-  for (const value of [undefined, "", "fr", "ru"])
-    assert.equal(resolveLocale(value), "ru");
-  assert.equal(resolveLocale("en"), "en");
+test("locale resolution has a stable English fallback", () => {
+  for (const value of [undefined, "", "fr", "en"])
+    assert.equal(resolveLocale(value), "en");
+  assert.equal(resolveLocale("ru"), "ru");
 });
 
 test("date headings contain twelve months and start the week on Monday", () => {
   assert.equal(months.length, 12);
   assert.equal(weekdays.length, 7);
-  const english = process.env.NEXT_PUBLIC_LOCALE === "en";
+  const english = process.env.NEXT_PUBLIC_LOCALE !== "ru";
   assert.equal(months[0], english ? "January" : "январь");
   assert.equal(weekdays[0], english ? "Mon" : "пн");
 });
@@ -89,4 +89,32 @@ test("validation translates field names, required values, limits and unknown iss
     validationMessage({ code: "custom", path: [] }, "en"),
     "Value: invalid value.",
   );
+});
+
+test("language tokens cover the catalogs and Translate renders escaped text without a wrapper", async () => {
+  const tokens = await import("../.i18n-test/tokens.js");
+  const { Translate } = await import("../.i18n-test/translate.js");
+  const { createElement } = await import("react");
+  const { renderToStaticMarkup } = await import("react-dom/server");
+  const namedTokens = Object.keys(tokens).filter(
+    (key) =>
+      key !== "default" && key !== "__esModule" && key !== "module.exports",
+  );
+  assert.deepEqual(namedTokens.sort(), Object.keys(en).sort());
+  for (const key of namedTokens) assert.equal(tokens[key], key);
+  const english = process.env.NEXT_PUBLIC_LOCALE !== "ru";
+  assert.equal(
+    renderToStaticMarkup(
+      createElement(Translate, { token: tokens.EVENTS_BACK }),
+    ),
+    english ? "Back to list" : "Назад к списку",
+  );
+  const html = renderToStaticMarkup(
+    createElement(Translate, {
+      token: tokens.EVENTS_EDIT_LABEL,
+      values: { name: "<script>" },
+    }),
+  );
+  assert.ok(html.includes("&lt;script&gt;"));
+  assert.ok(!html.includes("<script>"));
 });

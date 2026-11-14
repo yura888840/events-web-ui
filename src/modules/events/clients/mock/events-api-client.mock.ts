@@ -1,4 +1,5 @@
-import { t } from "@/i18n";
+import { ERRORS_NOT_FOUND } from "@/i18n/tokens";
+import { translate } from "@/i18n";
 import type { CreateEventDto, EventDto } from "@yura888840/events-contracts";
 import type { EventsApiClient, UpdateEventInput } from "../events-api-client";
 
@@ -24,7 +25,7 @@ export class MockEventsApiClient implements EventsApiClient {
     const existing = this.events.get(id);
 
     if (!existing) {
-      throw new Error(t("errors.notFound", { id }));
+      throw new Error(translate(ERRORS_NOT_FOUND, { id }));
     }
 
     // Имитируем JSON: поля со значением undefined не отправляются.

@@ -1,4 +1,20 @@
 import {
+  FIELDS_DAY,
+  FIELDS_DESCRIPTION,
+  FIELDS_IS_ACTIVE,
+  FIELDS_MONTH,
+  FIELDS_NAME,
+  FIELDS_RECURRENCE,
+  FIELDS_TYPE,
+  FIELDS_VALUE,
+  FIELDS_YEAR,
+  VALIDATION_INVALID,
+  VALIDATION_MAXIMUM,
+  VALIDATION_MINIMUM,
+  VALIDATION_NAME_LENGTH,
+  VALIDATION_REQUIRED,
+} from "./tokens";
+import {
   createTranslator,
   locale,
   type Locale,
@@ -13,14 +29,14 @@ type ValidationIssue = {
 };
 
 const fields: Record<string, MessageKey> = {
-  name: "fields.name",
-  description: "fields.description",
-  day: "fields.day",
-  month: "fields.month",
-  year: "fields.year",
-  type: "fields.type",
-  recurrence: "fields.recurrence",
-  isActive: "fields.isActive",
+  name: FIELDS_NAME,
+  description: FIELDS_DESCRIPTION,
+  day: FIELDS_DAY,
+  month: FIELDS_MONTH,
+  year: FIELDS_YEAR,
+  type: FIELDS_TYPE,
+  recurrence: FIELDS_RECURRENCE,
+  isActive: FIELDS_IS_ACTIVE,
 };
 
 /** Translate schema issues without leaking schema paths or English Zod messages. */
@@ -28,22 +44,25 @@ export function validationMessage(
   issue: ValidationIssue,
   language: Locale = locale,
 ): string {
-  const t = createTranslator(language);
+  const translate = createTranslator(language);
   const fieldName = String(issue.path[0] ?? "");
-  const field = t(fields[fieldName] ?? "fields.value");
+  const field = translate(fields[fieldName] ?? FIELDS_VALUE);
   if (issue.code === "too_small" && issue.minimum !== undefined) {
     return fieldName === "name"
-      ? t("validation.required", { field })
-      : t("validation.minimum", { field, minimum: String(issue.minimum) });
+      ? translate(VALIDATION_REQUIRED, { field })
+      : translate(VALIDATION_MINIMUM, {
+          field,
+          minimum: String(issue.minimum),
+        });
   }
   if (issue.code === "too_big" && issue.maximum !== undefined) {
-    return t(
-      fieldName === "name" ? "validation.nameLength" : "validation.maximum",
+    return translate(
+      fieldName === "name" ? VALIDATION_NAME_LENGTH : VALIDATION_MAXIMUM,
       {
         field,
         maximum: String(issue.maximum),
       },
     );
   }
-  return t("validation.invalid", { field });
+  return translate(VALIDATION_INVALID, { field });
 }
