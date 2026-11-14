@@ -11,25 +11,47 @@ import { validationMessage } from "../.i18n-test/validation.js";
 import en from "../src/i18n/messages/en.json" with { type: "json" };
 import ru from "../src/i18n/messages/ru.json" with { type: "json" };
 
+function flatten(object, prefix = "") {
+  return Object.fromEntries(
+    Object.entries(object).flatMap(([key, value]) => {
+      const path = prefix ? `${prefix}.${key}` : key;
+      return typeof value === "string"
+        ? [[path, value]]
+        : Object.entries(flatten(value, path));
+    }),
+  );
+}
+const englishMessages = flatten(en);
+const russianMessages = flatten(ru);
+
 test("catalogs have identical keys and interpolation parameters", () => {
-  assert.deepEqual(Object.keys(en).sort(), Object.keys(ru).sort());
-  for (const key of Object.keys(en)) {
-    assert.ok(en[key].trim());
-    assert.ok(ru[key].trim());
+  assert.deepEqual(
+    Object.keys(englishMessages).sort(),
+    Object.keys(russianMessages).sort(),
+  );
+  for (const key of Object.keys(englishMessages)) {
+    assert.ok(englishMessages[key].trim());
+    assert.ok(russianMessages[key].trim());
+    assert.equal(createTranslator("en")(key), englishMessages[key]);
+    assert.equal(createTranslator("ru")(key), russianMessages[key]);
     const placeholders = (text) =>
       [...text.matchAll(/\{(\w+)\}/g)].map((match) => match[1]).sort();
-    assert.deepEqual(placeholders(en[key]), placeholders(ru[key]), key);
+    assert.deepEqual(
+      placeholders(englishMessages[key]),
+      placeholders(russianMessages[key]),
+      key,
+    );
   }
 });
 
 test("translations interpolate user content without interpreting it", () => {
   const name = "<img src=x> {count} $&";
   assert.equal(
-    createTranslator("en")("EVENTS_EDIT_LABEL", { name }),
+    createTranslator("en")("EVENTS.LABEL.EDIT", { name }),
     `Edit event “${name}”`,
   );
   assert.equal(
-    createTranslator("ru")("EVENTS_EDIT_LABEL", { name }),
+    createTranslator("ru")("EVENTS.LABEL.EDIT", { name }),
     `Редактировать событие «${name}»`,
   );
 });
@@ -100,18 +122,26 @@ test("language tokens cover the catalogs and Translate renders escaped text with
     (key) =>
       key !== "default" && key !== "__esModule" && key !== "module.exports",
   );
-  assert.deepEqual(namedTokens.sort(), Object.keys(en).sort());
-  for (const key of namedTokens) assert.equal(tokens[key], key);
+  const tokenPaths = flatten(
+    Object.fromEntries(namedTokens.map((key) => [key, tokens[key]])),
+  );
+  assert.deepEqual(
+    Object.keys(tokenPaths).sort(),
+    Object.keys(englishMessages).sort(),
+  );
+  for (const [path, value] of Object.entries(tokenPaths))
+    assert.equal(value, path);
+  assert.equal(tokens.CALENDAR.DIALOG.CREATE, "CALENDAR.DIALOG.CREATE");
   const english = process.env.NEXT_PUBLIC_LOCALE !== "ru";
   assert.equal(
     renderToStaticMarkup(
-      createElement(Translate, { token: tokens.EVENTS_BACK }),
+      createElement(Translate, { token: tokens.EVENTS.BACK }),
     ),
     english ? "Back to list" : "Назад к списку",
   );
   const html = renderToStaticMarkup(
     createElement(Translate, {
-      token: tokens.EVENTS_EDIT_LABEL,
+      token: tokens.EVENTS.LABEL.EDIT,
       values: { name: "<script>" },
     }),
   );

@@ -1,25 +1,12 @@
 "use client";
 
 import {
-  CALENDAR_TITLE,
-  CATEGORIES_PERSONAL,
-  CATEGORIES_WORK,
-  COMMON_CANCEL,
-  COMMON_SAVE,
-  EDITOR_ACTIVE,
-  EDITOR_EDIT,
-  EDITOR_INVALID,
-  EDITOR_NEW,
-  EDITOR_NO_REPEAT,
-  EDITOR_YEARLY,
-  FIELDS_DATE,
-  FIELDS_DESCRIPTION,
-  FIELDS_NAME,
-  FIELDS_RECURRENCE,
-  FIELDS_SHORT_TYPE,
-  FIELDS_TIME,
-  TYPES_BIRTHDAY,
-  TYPES_EVENT,
+  CALENDAR,
+  CATEGORIES,
+  COMMON,
+  EDITOR,
+  FIELDS,
+  TYPES,
 } from "@/i18n/tokens";
 import { Translate } from "@/i18n/translate";
 import { translate } from "@/i18n";
@@ -69,7 +56,7 @@ export function EventEditor({ date, event, onSave, onCancel }: Props) {
       check.getMonth() + 1 !== month ||
       check.getDate() !== dateNumber
     ) {
-      setError(translate(EDITOR_INVALID));
+      setError(translate(EDITOR.INVALID));
       return;
     }
     onSave({
@@ -91,13 +78,13 @@ export function EventEditor({ date, event, onSave, onCancel }: Props) {
     <form onSubmit={submit} className="calendar-editor">
       <h2>
         {event ? (
-          <Translate token={EDITOR_EDIT} />
+          <Translate token={EDITOR.EDIT} />
         ) : (
-          <Translate token={EDITOR_NEW} />
+          <Translate token={EDITOR.NEW} />
         )}
       </h2>
       <label>
-        <Translate token={FIELDS_NAME} />{" "}
+        <Translate token={FIELDS.NAME} />{" "}
         <input
           autoFocus
           required
@@ -107,7 +94,7 @@ export function EventEditor({ date, event, onSave, onCancel }: Props) {
         />
       </label>
       <label>
-        <Translate token={FIELDS_DESCRIPTION} />{" "}
+        <Translate token={FIELDS.DESCRIPTION} />{" "}
         <textarea
           rows={3}
           value={description}
@@ -116,7 +103,7 @@ export function EventEditor({ date, event, onSave, onCancel }: Props) {
       </label>
       <div className="editor-fields">
         <label>
-          <Translate token={FIELDS_DATE} />{" "}
+          <Translate token={FIELDS.DATE} />{" "}
           <input
             required
             type="date"
@@ -125,7 +112,7 @@ export function EventEditor({ date, event, onSave, onCancel }: Props) {
           />
         </label>
         <label>
-          <Translate token={FIELDS_TIME} />{" "}
+          <Translate token={FIELDS.TIME} />{" "}
           <input
             type="time"
             value={time}
@@ -135,37 +122,37 @@ export function EventEditor({ date, event, onSave, onCancel }: Props) {
       </div>
       <div className="editor-fields">
         <label>
-          <Translate token={FIELDS_SHORT_TYPE} />{" "}
+          <Translate token={FIELDS.SHORT.TYPE} />{" "}
           <select
             value={type}
             onChange={(e) => setType(e.target.value as CalendarEvent["type"])}
           >
             <option value="other">
-              <Translate token={TYPES_EVENT} />
+              <Translate token={TYPES.EVENT} />
             </option>
             <option value="birthday">
-              <Translate token={TYPES_BIRTHDAY} />
+              <Translate token={TYPES.BIRTHDAY} />
             </option>
           </select>
         </label>
         <label>
-          <Translate token={CALENDAR_TITLE} />{" "}
+          <Translate token={CALENDAR.TITLE} />{" "}
           <select
             value={category}
             disabled={type === "birthday"}
             onChange={(e) => setCategory(e.target.value as "personal" | "work")}
           >
             <option value="personal">
-              <Translate token={CATEGORIES_PERSONAL} />
+              <Translate token={CATEGORIES.PERSONAL} />
             </option>
             <option value="work">
-              <Translate token={CATEGORIES_WORK} />
+              <Translate token={CATEGORIES.WORK} />
             </option>
           </select>
         </label>
       </div>
       <label>
-        <Translate token={FIELDS_RECURRENCE} />{" "}
+        <Translate token={FIELDS.RECURRENCE} />{" "}
         <select
           value={recurrence}
           onChange={(e) =>
@@ -173,10 +160,10 @@ export function EventEditor({ date, event, onSave, onCancel }: Props) {
           }
         >
           <option value="none">
-            <Translate token={EDITOR_NO_REPEAT} />
+            <Translate token={EDITOR.NO.REPEAT} />
           </option>
           <option value="yearly">
-            <Translate token={EDITOR_YEARLY} />
+            <Translate token={EDITOR.YEARLY} />
           </option>
         </select>
       </label>
@@ -186,7 +173,7 @@ export function EventEditor({ date, event, onSave, onCancel }: Props) {
           checked={isActive}
           onChange={(e) => setIsActive(e.target.checked)}
         />
-        <Translate token={EDITOR_ACTIVE} />
+        <Translate token={EDITOR.ACTIVE} />
       </label>
       {error && (
         <p role="alert" className="editor-error">
@@ -195,10 +182,10 @@ export function EventEditor({ date, event, onSave, onCancel }: Props) {
       )}
       <div className="editor-actions">
         <button className="editor-cancel" type="button" onClick={onCancel}>
-          <Translate token={COMMON_CANCEL} />
+          <Translate token={COMMON.CANCEL} />
         </button>
         <button className="editor-submit" type="submit">
-          <Translate token={COMMON_SAVE} />
+          <Translate token={COMMON.SAVE} />
         </button>
       </div>
     </form>

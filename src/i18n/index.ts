@@ -1,10 +1,30 @@
 import en from "./messages/en.json";
 import ru from "./messages/ru.json";
+import { CALENDAR } from "./tokens";
 
 export type Locale = "ru" | "en";
-export type MessageKey = keyof typeof en;
+type MessagePaths<T> = {
+  [K in keyof T & string]: T[K] extends string
+    ? K
+    : `${K}.${MessagePaths<T[K]>}`;
+}[keyof T & string];
+export type MessageKey = MessagePaths<typeof en>;
 export type TranslationValues = Record<string, string | number>;
-const messages: Record<Locale, Record<MessageKey, string>> = { en, ru };
+const messages: Record<Locale, typeof en> = { en, ru };
+type MessageTree = { [key: string]: string | MessageTree };
+
+function getMessage(language: Locale, key: MessageKey): string {
+  let value: string | MessageTree = messages[language];
+  for (const segment of key.split(".")) {
+    if (typeof value === "string" || !Object.hasOwn(value, segment)) {
+      throw new Error(`Unknown translation token: ${key}`);
+    }
+    value = value[segment];
+  }
+  if (typeof value !== "string")
+    throw new Error(`Incomplete translation token: ${key}`);
+  return value;
+}
 
 export function resolveLocale(value?: string): Locale {
   return value === "ru" ? "ru" : "en";
@@ -16,7 +36,7 @@ export const intlLocale = locale === "ru" ? "ru-RU" : "en-GB";
 
 export function createTranslator(language: Locale) {
   return (key: MessageKey, parameters: TranslationValues = {}): string =>
-    messages[language][key].replace(
+    getMessage(language, key).replace(
       /\{(\w+)\}/g,
       (placeholder, name: string) =>
         Object.hasOwn(parameters, name)
@@ -33,7 +53,7 @@ export function eventCount(count: number, language: Locale = locale): string {
     category === "one" || category === "few" || category === "many"
       ? (category.toUpperCase() as "ONE" | "FEW" | "MANY")
       : "OTHER";
-  return createTranslator(language)(`CALENDAR_COUNT_${suffix}`, { count });
+  return createTranslator(language)(CALENDAR.COUNT[suffix], { count });
 }
 
 export function formatDate(

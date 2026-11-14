@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  COMMON_CANCEL,
-  COMMON_SAVE,
-  ERRORS_SAVE,
-  FORM_SAVED,
-  FORM_SAVING,
-} from "@/i18n/tokens";
+import { COMMON, ERRORS, FORM } from "@/i18n/tokens";
 import { Translate } from "@/i18n/translate";
 import { translate } from "@/i18n";
 import { validationMessage } from "@/i18n/validation";
@@ -79,7 +73,7 @@ export default function EventEditForm({
       setIsSaved(true);
     } catch (error) {
       setErrors([
-        error instanceof Error ? error.message : translate(ERRORS_SAVE),
+        error instanceof Error ? error.message : translate(ERRORS.SAVE),
       ]);
     } finally {
       setIsSaving(false);
@@ -92,20 +86,20 @@ export default function EventEditForm({
 
       <FormFeedback
         errors={errors}
-        success={isSaved ? translate(FORM_SAVED) : undefined}
+        success={isSaved ? translate(FORM.SAVED) : undefined}
       />
 
       <div className="flex items-center gap-3 border-t border-gray-200 pt-6">
         <Button variant="submit" type="submit" disabled={isSaving}>
           {isSaving ? (
-            <Translate token={FORM_SAVING} />
+            <Translate token={FORM.SAVING} />
           ) : (
-            <Translate token={COMMON_SAVE} />
+            <Translate token={COMMON.SAVE} />
           )}
         </Button>
 
         <ButtonLink variant="secondary" href="/events">
-          <Translate token={COMMON_CANCEL} />
+          <Translate token={COMMON.CANCEL} />
         </ButtonLink>
       </div>
     </form>

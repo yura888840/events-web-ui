@@ -90,7 +90,7 @@ current contracts package incorrectly aliases `UpdateEventDto` to the full event
 ## Localization
 
 Application copy lives in `src/i18n/messages/en.json` and `ru.json`, using
-uppercase language tokens such as `EVENTS_BACK`. English is the default and the
+nested language tokens such as `EVENTS.BACK` and `CALENDAR.DIALOG.CREATE`. English is the default and the
 fallback for unsupported locale values. Set `NEXT_PUBLIC_LOCALE=ru` before
 starting development, building the app, or running Storybook for Russian:
 
@@ -109,18 +109,19 @@ translation pipe):
 
 ```tsx
 import { Translate } from '@/i18n/translate';
-import { EVENTS_BACK, EVENTS_EDIT_LABEL } from '@/i18n/tokens';
+import { EVENTS } from '@/i18n/tokens';
 
-<Translate token={EVENTS_BACK} />
-<Translate token={EVENTS_EDIT_LABEL} values={{ name: event.name }} />
+<Translate token={EVENTS.BACK} />
+<Translate token={EVENTS.LABEL.EDIT} values={{ name: event.name }} />
 ```
 
 It renders escaped text without an extra DOM element and works in both server
 and client components. For string-only APIs such as `aria-label`, placeholders,
-metadata, validation, and Storybook queries, use `translate(EVENTS_EDIT_LABEL,
+metadata, validation, and Storybook queries, use `translate(EVENTS.LABEL.EDIT,
 { name: event.name })` from `@/i18n`.
 
-Add each token to `src/i18n/tokens.ts` and matching entries to both JSON catalogs.
+Add each token to `src/i18n/tokens.ts` and matching nested entries to both JSON catalogs. Token values are dot-separated paths
+(e.g. `CALENDAR.DIALOG.CREATE` resolves to `CALENDAR > DIALOG > CREATE`).
 Use named placeholders for complete phrases. Use `eventCount(count)` for plurals
 and `formatDate` for dates. Month and weekday names come from `Intl`, with Monday
 remaining the first calendar day. Schema errors are mapped to localized field

@@ -1,4 +1,4 @@
-import { EVENTS_DELETE_LABEL, EVENTS_EDIT_LABEL } from "@/i18n/tokens";
+import { EVENTS } from "@/i18n/tokens";
 import { translate } from "@/i18n";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
@@ -29,13 +29,13 @@ export const Active: Story = {
     await expect(args.onToggle).toHaveBeenCalledOnce();
     await userEvent.click(
       canvas.getByRole("button", {
-        name: translate(EVENTS_EDIT_LABEL, { name: args.event.name }),
+        name: translate(EVENTS.LABEL.EDIT, { name: args.event.name }),
       }),
     );
     await expect(args.onEdit).toHaveBeenCalledOnce();
     await userEvent.click(
       canvas.getByRole("button", {
-        name: translate(EVENTS_DELETE_LABEL, { name: args.event.name }),
+        name: translate(EVENTS.LABEL.DELETE, { name: args.event.name }),
       }),
     );
     await expect(args.onDelete).toHaveBeenCalledOnce();

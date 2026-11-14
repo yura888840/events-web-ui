@@ -1,105 +1,175 @@
 {
-  "COMMON_CANCEL": "Отмена",
-  "COMMON_SAVE": "Сохранить",
-  "COMMON_CLOSE": "Закрыть",
-  "COMMON_EDIT": "Редактировать",
-  "COMMON_DELETE": "Удалить",
-  "EVENTS_TITLE": "События",
-  "EVENTS_ADD": "Добавить",
-  "EVENTS_EMPTY": "Событий пока нет.",
-  "EVENTS_EDIT": "Редактировать событие",
-  "EVENTS_NEW": "Новое событие",
-  "EVENTS_BACK": "Назад к списку",
-  "FIELDS_NAME": "Название",
-  "FIELDS_DESCRIPTION": "Описание",
-  "FIELDS_EVENT_DATE": "Дата события",
-  "FIELDS_DAY": "День",
-  "FIELDS_MONTH": "Месяц",
-  "FIELDS_YEAR": "Год (необязательно)",
-  "FIELDS_TYPE": "Тип события",
-  "FIELDS_RECURRENCE": "Повторение",
-  "FIELDS_ACTIVE": "Событие активно",
-  "TYPES_BIRTHDAY": "День рождения",
-  "TYPES_OTHER": "Другое",
-  "RECURRENCE_YEARLY": "Ежегодно",
-  "RECURRENCE_NONE": "Без повторения",
-  "FORM_CREATE": "Создать",
-  "FORM_CREATING": "Создание...",
-  "FORM_SAVING": "Сохранение...",
-  "FORM_CREATED": "Событие создано в памяти мока.",
-  "FORM_SAVED": "Изменения сохранены в памяти мока.",
-  "ERRORS_CREATE": "Не удалось создать событие",
-  "ERRORS_SAVE": "Не удалось сохранить событие.",
-  "EVENTS_ACTIVATE": "Активировать",
-  "EVENTS_DEACTIVATE": "Деактивировать",
-  "EDITOR_INVALID": "Укажите название и корректную дату.",
-  "EDITOR_EDIT": "Редактировать событие",
-  "EDITOR_NEW": "Новое событие",
-  "FIELDS_DATE": "Дата",
-  "FIELDS_TIME": "Время",
-  "FIELDS_SHORT_TYPE": "Тип",
-  "TYPES_EVENT": "Событие",
-  "CALENDAR_TITLE": "Календарь",
-  "CATEGORIES_PERSONAL": "Личное",
-  "CATEGORIES_WORK": "Работа",
-  "CATEGORIES_BIRTHDAY": "Дни рождения",
-  "EDITOR_NO_REPEAT": "Без повтора",
-  "EDITOR_YEARLY": "Каждый год",
-  "EDITOR_ACTIVE": "Активное событие",
-  "CALENDAR_TAGLINE": "Ваше время. Ваши события.",
-  "CALENDAR_SPACE": "Личное пространство",
-  "CALENDAR_WORKSPACE": "ПРОСТРАНСТВО",
-  "CALENDAR_PREVIOUS_MONTH": "Предыдущий месяц",
-  "CALENDAR_NEXT_MONTH": "Следующий месяц",
-  "CALENDAR_MY_CALENDARS": "МОИ КАЛЕНДАРИ",
-  "CALENDAR_NOTE_TITLE": "Важное — рядом",
-  "CALENDAR_NOTE": "Встречи, дни рождения и ваши планы в одном календаре.",
-  "CALENDAR_DEMO": "Демо · локальные события",
-  "CALENDAR_EYEBROW": "ПЛАНЫ И ВАЖНЫЕ ДАТЫ",
-  "CALENDAR_ADD": "Добавить событие",
-  "CALENDAR_SEARCH": "Найти событие",
-  "CALENDAR_CLEAR_SEARCH": "Очистить поиск",
-  "CALENDAR_TODAY": "Сегодня",
-  "CALENDAR_PREVIOUS_PERIOD": "Предыдущий период",
-  "CALENDAR_NEXT_PERIOD": "Следующий период",
-  "CALENDAR_LIST": "Список",
-  "CALENDAR_WEEK": "Неделя",
-  "CALENDAR_SHOW_INACTIVE": "Показать неактивные",
-  "CALENDAR_CHOOSE_MONTH": "Выбрать месяц",
-  "CALENDAR_CHOOSE_YEAR": "Выбрать год",
-  "CALENDAR_EMPTY": "В этом периоде событий нет",
-  "CALENDAR_ALL_DAY": "Весь день",
-  "CALENDAR_INACTIVE_SUFFIX": " · Неактивно",
-  "CALENDAR_LABEL": "Календарь событий",
-  "CALENDAR_TODAY_BADGE": "СЕГОДНЯ",
-  "CALENDAR_SCHEDULED": "Запланированное событие",
-  "CALENDAR_WEEK_START": "Неделя начинается в понедельник",
-  "CALENDAR_DETAILS_HINT": "Нажмите на событие, чтобы посмотреть подробности",
-  "CALENDAR_LOADING": "Загрузка событий…",
-  "CALENDAR_EDIT_DIALOG": "Редактирование события",
-  "CALENDAR_CREATE_DIALOG": "Создание события",
-  "CALENDAR_DETAILS": "Подробности события",
-  "CALENDAR_INACTIVE": "Неактивное событие",
-  "CALENDAR_RECURRING": "Повторяется каждый год",
-  "CALENDAR_CONFIRM_DELETE": "Удалить событие?",
-  "APP_TITLE": "Календарь событий",
-  "APP_DESCRIPTION": "Ваши события, дни рождения и планы в одном календаре.",
-  "APP_BRAND": "events",
-  "APP_AVATAR": "ЮО",
-  "EVENTS_TOGGLE_LABEL": "Активность события «{name}»",
-  "EVENTS_EDIT_LABEL": "Редактировать событие «{name}»",
-  "EVENTS_DELETE_LABEL": "Удалить событие «{name}»",
-  "CALENDAR_ADD_ON_DATE": "Добавить событие: {date}",
-  "CALENDAR_COUNT_ONE": "{count} событие в этом периоде",
-  "CALENDAR_COUNT_FEW": "{count} события в этом периоде",
-  "CALENDAR_COUNT_MANY": "{count} событий в этом периоде",
-  "CALENDAR_COUNT_OTHER": "{count} события в этом периоде",
-  "ERRORS_NOT_FOUND": "Событие «{id}» не найдено",
-  "VALIDATION_INVALID": "{field}: некорректное значение.",
-  "VALIDATION_REQUIRED": "{field}: заполните это поле.",
-  "VALIDATION_MINIMUM": "{field}: минимальное значение — {minimum}.",
-  "VALIDATION_MAXIMUM": "{field}: максимальное значение — {maximum}.",
-  "VALIDATION_NAME_LENGTH": "Название: не более {maximum} символов.",
-  "FIELDS_IS_ACTIVE": "Активность",
-  "FIELDS_VALUE": "Значение"
+  "COMMON": {
+    "CANCEL": "Отмена",
+    "SAVE": "Сохранить",
+    "CLOSE": "Закрыть",
+    "EDIT": "Редактировать",
+    "DELETE": "Удалить"
+  },
+  "EVENTS": {
+    "TITLE": "События",
+    "ADD": "Добавить",
+    "EMPTY": "Событий пока нет.",
+    "EDIT": "Редактировать событие",
+    "NEW": "Новое событие",
+    "BACK": "Назад к списку",
+    "ACTIVATE": "Активировать",
+    "DEACTIVATE": "Деактивировать",
+    "LABEL": {
+      "TOGGLE": "Активность события «{name}»",
+      "EDIT": "Редактировать событие «{name}»",
+      "DELETE": "Удалить событие «{name}»"
+    }
+  },
+  "FIELDS": {
+    "NAME": "Название",
+    "DESCRIPTION": "Описание",
+    "EVENT": {
+      "DATE": "Дата события"
+    },
+    "DAY": "День",
+    "MONTH": "Месяц",
+    "YEAR": "Год (необязательно)",
+    "TYPE": "Тип события",
+    "RECURRENCE": "Повторение",
+    "ACTIVE": "Событие активно",
+    "DATE": "Дата",
+    "TIME": "Время",
+    "SHORT": {
+      "TYPE": "Тип"
+    },
+    "IS": {
+      "ACTIVE": "Активность"
+    },
+    "VALUE": "Значение"
+  },
+  "TYPES": {
+    "BIRTHDAY": "День рождения",
+    "OTHER": "Другое",
+    "EVENT": "Событие"
+  },
+  "RECURRENCE": {
+    "YEARLY": "Ежегодно",
+    "NONE": "Без повторения"
+  },
+  "FORM": {
+    "CREATE": "Создать",
+    "CREATING": "Создание...",
+    "SAVING": "Сохранение...",
+    "CREATED": "Событие создано в памяти мока.",
+    "SAVED": "Изменения сохранены в памяти мока."
+  },
+  "ERRORS": {
+    "CREATE": "Не удалось создать событие",
+    "SAVE": "Не удалось сохранить событие.",
+    "NOT": {
+      "FOUND": "Событие «{id}» не найдено"
+    }
+  },
+  "EDITOR": {
+    "INVALID": "Укажите название и корректную дату.",
+    "EDIT": "Редактировать событие",
+    "NEW": "Новое событие",
+    "NO": {
+      "REPEAT": "Без повтора"
+    },
+    "YEARLY": "Каждый год",
+    "ACTIVE": "Активное событие"
+  },
+  "CALENDAR": {
+    "TITLE": "Календарь",
+    "TAGLINE": "Ваше время. Ваши события.",
+    "SPACE": "Личное пространство",
+    "WORKSPACE": "ПРОСТРАНСТВО",
+    "MONTH": {
+      "PREVIOUS": "Предыдущий месяц",
+      "NEXT": "Следующий месяц",
+      "CHOOSE": "Выбрать месяц"
+    },
+    "MY": {
+      "CALENDARS": "МОИ КАЛЕНДАРИ"
+    },
+    "NOTE": {
+      "TITLE": "Важное — рядом",
+      "BODY": "Встречи, дни рождения и ваши планы в одном календаре."
+    },
+    "DEMO": "Демо · локальные события",
+    "EYEBROW": "ПЛАНЫ И ВАЖНЫЕ ДАТЫ",
+    "ADD": {
+      "LABEL": "Добавить событие",
+      "ON": {
+        "DATE": "Добавить событие: {date}"
+      }
+    },
+    "SEARCH": {
+      "LABEL": "Найти событие",
+      "CLEAR": "Очистить поиск"
+    },
+    "TODAY": {
+      "LABEL": "Сегодня",
+      "BADGE": "СЕГОДНЯ"
+    },
+    "PERIOD": {
+      "PREVIOUS": "Предыдущий период",
+      "NEXT": "Следующий период"
+    },
+    "LIST": "Список",
+    "WEEK": {
+      "LABEL": "Неделя",
+      "START": "Неделя начинается в понедельник"
+    },
+    "INACTIVE": {
+      "SHOW": "Показать неактивные",
+      "SUFFIX": " · Неактивно",
+      "LABEL": "Неактивное событие"
+    },
+    "YEAR": {
+      "CHOOSE": "Выбрать год"
+    },
+    "EMPTY": "В этом периоде событий нет",
+    "ALL": {
+      "DAY": "Весь день"
+    },
+    "LABEL": "Календарь событий",
+    "SCHEDULED": "Запланированное событие",
+    "DETAILS": {
+      "HINT": "Нажмите на событие, чтобы посмотреть подробности",
+      "TITLE": "Подробности события"
+    },
+    "LOADING": "Загрузка событий…",
+    "DIALOG": {
+      "EDIT": "Редактирование события",
+      "CREATE": "Создание события"
+    },
+    "RECURRING": "Повторяется каждый год",
+    "CONFIRM": {
+      "DELETE": "Удалить событие?"
+    },
+    "COUNT": {
+      "ONE": "{count} событие в этом периоде",
+      "FEW": "{count} события в этом периоде",
+      "MANY": "{count} событий в этом периоде",
+      "OTHER": "{count} события в этом периоде"
+    }
+  },
+  "CATEGORIES": {
+    "PERSONAL": "Личное",
+    "WORK": "Работа",
+    "BIRTHDAY": "Дни рождения"
+  },
+  "APP": {
+    "TITLE": "Календарь событий",
+    "DESCRIPTION": "Ваши события, дни рождения и планы в одном календаре.",
+    "BRAND": "events",
+    "AVATAR": "ЮО"
+  },
+  "VALIDATION": {
+    "INVALID": "{field}: некорректное значение.",
+    "REQUIRED": "{field}: заполните это поле.",
+    "MINIMUM": "{field}: минимальное значение — {minimum}.",
+    "MAXIMUM": "{field}: максимальное значение — {maximum}.",
+    "NAME": {
+      "LENGTH": "Название: не более {maximum} символов."
+    }
+  }
 }

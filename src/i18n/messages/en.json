@@ -1,105 +1,175 @@
 {
-  "COMMON_CANCEL": "Cancel",
-  "COMMON_SAVE": "Save",
-  "COMMON_CLOSE": "Close",
-  "COMMON_EDIT": "Edit",
-  "COMMON_DELETE": "Delete",
-  "EVENTS_TITLE": "Events",
-  "EVENTS_ADD": "Add new",
-  "EVENTS_EMPTY": "No events yet.",
-  "EVENTS_EDIT": "Edit event",
-  "EVENTS_NEW": "New event",
-  "EVENTS_BACK": "Back to list",
-  "FIELDS_NAME": "Name",
-  "FIELDS_DESCRIPTION": "Description",
-  "FIELDS_EVENT_DATE": "Event date",
-  "FIELDS_DAY": "Day",
-  "FIELDS_MONTH": "Month",
-  "FIELDS_YEAR": "Year (optional)",
-  "FIELDS_TYPE": "Event type",
-  "FIELDS_RECURRENCE": "Recurrence",
-  "FIELDS_ACTIVE": "Event is active",
-  "TYPES_BIRTHDAY": "Birthday",
-  "TYPES_OTHER": "Other",
-  "RECURRENCE_YEARLY": "Yearly",
-  "RECURRENCE_NONE": "Does not repeat",
-  "FORM_CREATE": "Create",
-  "FORM_CREATING": "Creating...",
-  "FORM_SAVING": "Saving...",
-  "FORM_CREATED": "Event created in mock storage.",
-  "FORM_SAVED": "Changes saved in mock storage.",
-  "ERRORS_CREATE": "Could not create the event.",
-  "ERRORS_SAVE": "Could not save the event.",
-  "EVENTS_ACTIVATE": "Activate",
-  "EVENTS_DEACTIVATE": "Deactivate",
-  "EDITOR_INVALID": "Enter a name and a valid date.",
-  "EDITOR_EDIT": "Edit event",
-  "EDITOR_NEW": "New event",
-  "FIELDS_DATE": "Date",
-  "FIELDS_TIME": "Time",
-  "FIELDS_SHORT_TYPE": "Type",
-  "TYPES_EVENT": "Event",
-  "CALENDAR_TITLE": "Calendar",
-  "CATEGORIES_PERSONAL": "Personal",
-  "CATEGORIES_WORK": "Work",
-  "CATEGORIES_BIRTHDAY": "Birthdays",
-  "EDITOR_NO_REPEAT": "Does not repeat",
-  "EDITOR_YEARLY": "Every year",
-  "EDITOR_ACTIVE": "Active event",
-  "CALENDAR_TAGLINE": "Your time. Your events.",
-  "CALENDAR_SPACE": "Personal space",
-  "CALENDAR_WORKSPACE": "WORKSPACE",
-  "CALENDAR_PREVIOUS_MONTH": "Previous month",
-  "CALENDAR_NEXT_MONTH": "Next month",
-  "CALENDAR_MY_CALENDARS": "MY CALENDARS",
-  "CALENDAR_NOTE_TITLE": "Keep what matters close",
-  "CALENDAR_NOTE": "Meetings, birthdays, and your plans in one calendar.",
-  "CALENDAR_DEMO": "Demo · local events",
-  "CALENDAR_EYEBROW": "PLANS AND IMPORTANT DATES",
-  "CALENDAR_ADD": "Add event",
-  "CALENDAR_SEARCH": "Find an event",
-  "CALENDAR_CLEAR_SEARCH": "Clear search",
-  "CALENDAR_TODAY": "Today",
-  "CALENDAR_PREVIOUS_PERIOD": "Previous period",
-  "CALENDAR_NEXT_PERIOD": "Next period",
-  "CALENDAR_LIST": "List",
-  "CALENDAR_WEEK": "Week",
-  "CALENDAR_SHOW_INACTIVE": "Show inactive events",
-  "CALENDAR_CHOOSE_MONTH": "Choose month",
-  "CALENDAR_CHOOSE_YEAR": "Choose year",
-  "CALENDAR_EMPTY": "No events in this period",
-  "CALENDAR_ALL_DAY": "All day",
-  "CALENDAR_INACTIVE_SUFFIX": " · Inactive",
-  "CALENDAR_LABEL": "Events calendar",
-  "CALENDAR_TODAY_BADGE": "TODAY",
-  "CALENDAR_SCHEDULED": "Scheduled event",
-  "CALENDAR_WEEK_START": "The week starts on Monday",
-  "CALENDAR_DETAILS_HINT": "Click an event to see details",
-  "CALENDAR_LOADING": "Loading events…",
-  "CALENDAR_EDIT_DIALOG": "Edit event",
-  "CALENDAR_CREATE_DIALOG": "Create event",
-  "CALENDAR_DETAILS": "Event details",
-  "CALENDAR_INACTIVE": "Inactive event",
-  "CALENDAR_RECURRING": "Repeats every year",
-  "CALENDAR_CONFIRM_DELETE": "Delete this event?",
-  "APP_TITLE": "Events calendar",
-  "APP_DESCRIPTION": "Your events, birthdays, and plans in one calendar.",
-  "APP_BRAND": "events",
-  "APP_AVATAR": "YO",
-  "EVENTS_TOGGLE_LABEL": "Activity of event “{name}”",
-  "EVENTS_EDIT_LABEL": "Edit event “{name}”",
-  "EVENTS_DELETE_LABEL": "Delete event “{name}”",
-  "CALENDAR_ADD_ON_DATE": "Add event: {date}",
-  "CALENDAR_COUNT_ONE": "{count} event in this period",
-  "CALENDAR_COUNT_FEW": "{count} events in this period",
-  "CALENDAR_COUNT_MANY": "{count} events in this period",
-  "CALENDAR_COUNT_OTHER": "{count} events in this period",
-  "ERRORS_NOT_FOUND": "Event “{id}” not found",
-  "VALIDATION_INVALID": "{field}: invalid value.",
-  "VALIDATION_REQUIRED": "{field}: this field is required.",
-  "VALIDATION_MINIMUM": "{field}: minimum value is {minimum}.",
-  "VALIDATION_MAXIMUM": "{field}: maximum value is {maximum}.",
-  "VALIDATION_NAME_LENGTH": "Name: use at most {maximum} characters.",
-  "FIELDS_IS_ACTIVE": "Active",
-  "FIELDS_VALUE": "Value"
+  "COMMON": {
+    "CANCEL": "Cancel",
+    "SAVE": "Save",
+    "CLOSE": "Close",
+    "EDIT": "Edit",
+    "DELETE": "Delete"
+  },
+  "EVENTS": {
+    "TITLE": "Events",
+    "ADD": "Add new",
+    "EMPTY": "No events yet.",
+    "EDIT": "Edit event",
+    "NEW": "New event",
+    "BACK": "Back to list",
+    "ACTIVATE": "Activate",
+    "DEACTIVATE": "Deactivate",
+    "LABEL": {
+      "TOGGLE": "Activity of event “{name}”",
+      "EDIT": "Edit event “{name}”",
+      "DELETE": "Delete event “{name}”"
+    }
+  },
+  "FIELDS": {
+    "NAME": "Name",
+    "DESCRIPTION": "Description",
+    "EVENT": {
+      "DATE": "Event date"
+    },
+    "DAY": "Day",
+    "MONTH": "Month",
+    "YEAR": "Year (optional)",
+    "TYPE": "Event type",
+    "RECURRENCE": "Recurrence",
+    "ACTIVE": "Event is active",
+    "DATE": "Date",
+    "TIME": "Time",
+    "SHORT": {
+      "TYPE": "Type"
+    },
+    "IS": {
+      "ACTIVE": "Active"
+    },
+    "VALUE": "Value"
+  },
+  "TYPES": {
+    "BIRTHDAY": "Birthday",
+    "OTHER": "Other",
+    "EVENT": "Event"
+  },
+  "RECURRENCE": {
+    "YEARLY": "Yearly",
+    "NONE": "Does not repeat"
+  },
+  "FORM": {
+    "CREATE": "Create",
+    "CREATING": "Creating...",
+    "SAVING": "Saving...",
+    "CREATED": "Event created in mock storage.",
+    "SAVED": "Changes saved in mock storage."
+  },
+  "ERRORS": {
+    "CREATE": "Could not create the event.",
+    "SAVE": "Could not save the event.",
+    "NOT": {
+      "FOUND": "Event “{id}” not found"
+    }
+  },
+  "EDITOR": {
+    "INVALID": "Enter a name and a valid date.",
+    "EDIT": "Edit event",
+    "NEW": "New event",
+    "NO": {
+      "REPEAT": "Does not repeat"
+    },
+    "YEARLY": "Every year",
+    "ACTIVE": "Active event"
+  },
+  "CALENDAR": {
+    "TITLE": "Calendar",
+    "TAGLINE": "Your time. Your events.",
+    "SPACE": "Personal space",
+    "WORKSPACE": "WORKSPACE",
+    "MONTH": {
+      "PREVIOUS": "Previous month",
+      "NEXT": "Next month",
+      "CHOOSE": "Choose month"
+    },
+    "MY": {
+      "CALENDARS": "MY CALENDARS"
+    },
+    "NOTE": {
+      "TITLE": "Keep what matters close",
+      "BODY": "Meetings, birthdays, and your plans in one calendar."
+    },
+    "DEMO": "Demo · local events",
+    "EYEBROW": "PLANS AND IMPORTANT DATES",
+    "ADD": {
+      "LABEL": "Add event",
+      "ON": {
+        "DATE": "Add event: {date}"
+      }
+    },
+    "SEARCH": {
+      "LABEL": "Find an event",
+      "CLEAR": "Clear search"
+    },
+    "TODAY": {
+      "LABEL": "Today",
+      "BADGE": "TODAY"
+    },
+    "PERIOD": {
+      "PREVIOUS": "Previous period",
+      "NEXT": "Next period"
+    },
+    "LIST": "List",
+    "WEEK": {
+      "LABEL": "Week",
+      "START": "The week starts on Monday"
+    },
+    "INACTIVE": {
+      "SHOW": "Show inactive events",
+      "SUFFIX": " · Inactive",
+      "LABEL": "Inactive event"
+    },
+    "YEAR": {
+      "CHOOSE": "Choose year"
+    },
+    "EMPTY": "No events in this period",
+    "ALL": {
+      "DAY": "All day"
+    },
+    "LABEL": "Events calendar",
+    "SCHEDULED": "Scheduled event",
+    "DETAILS": {
+      "HINT": "Click an event to see details",
+      "TITLE": "Event details"
+    },
+    "LOADING": "Loading events…",
+    "DIALOG": {
+      "EDIT": "Edit event",
+      "CREATE": "Create event"
+    },
+    "RECURRING": "Repeats every year",
+    "CONFIRM": {
+      "DELETE": "Delete this event?"
+    },
+    "COUNT": {
+      "ONE": "{count} event in this period",
+      "FEW": "{count} events in this period",
+      "MANY": "{count} events in this period",
+      "OTHER": "{count} events in this period"
+    }
+  },
+  "CATEGORIES": {
+    "PERSONAL": "Personal",
+    "WORK": "Work",
+    "BIRTHDAY": "Birthdays"
+  },
+  "APP": {
+    "TITLE": "Events calendar",
+    "DESCRIPTION": "Your events, birthdays, and plans in one calendar.",
+    "BRAND": "events",
+    "AVATAR": "YO"
+  },
+  "VALIDATION": {
+    "INVALID": "{field}: invalid value.",
+    "REQUIRED": "{field}: this field is required.",
+    "MINIMUM": "{field}: minimum value is {minimum}.",
+    "MAXIMUM": "{field}: maximum value is {maximum}.",
+    "NAME": {
+      "LENGTH": "Name: use at most {maximum} characters."
+    }
+  }
 }

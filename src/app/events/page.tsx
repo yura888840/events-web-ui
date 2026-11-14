@@ -1,6 +1,6 @@
 "use client";
 
-import { EVENTS_ADD, EVENTS_EMPTY, EVENTS_TITLE } from "@/i18n/tokens";
+import { EVENTS } from "@/i18n/tokens";
 import { Translate } from "@/i18n/translate";
 import { Button } from "@/components/ui/button";
 import { EventListItem } from "@/modules/events/components/event-list-item";
@@ -28,7 +28,7 @@ export default function EventsPage() {
     <main className="min-h-screen bg-white px-6 py-12 text-gray-900">
       <div className="mx-auto max-w-2xl">
         <h1 className="mb-6 text-2xl font-semibold">
-          <Translate token={EVENTS_TITLE} />
+          <Translate token={EVENTS.TITLE} />
         </h1>
 
         <div
@@ -41,7 +41,7 @@ export default function EventsPage() {
 
           <Button type="button" onClick={() => router.push("/events/new")}>
             <span aria-hidden="true">+</span>
-            <Translate token={EVENTS_ADD} />
+            <Translate token={EVENTS.ADD} />
           </Button>
         </div>
 
@@ -61,7 +61,7 @@ export default function EventsPage() {
 
         {events.length === 0 && (
           <p className="text-gray-500">
-            <Translate token={EVENTS_EMPTY} />
+            <Translate token={EVENTS.EMPTY} />
           </p>
         )}
       </div>

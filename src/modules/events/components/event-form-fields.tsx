@@ -1,19 +1,5 @@
 "use client";
-import {
-  FIELDS_ACTIVE,
-  FIELDS_DAY,
-  FIELDS_DESCRIPTION,
-  FIELDS_EVENT_DATE,
-  FIELDS_MONTH,
-  FIELDS_NAME,
-  FIELDS_RECURRENCE,
-  FIELDS_TYPE,
-  FIELDS_YEAR,
-  RECURRENCE_NONE,
-  RECURRENCE_YEARLY,
-  TYPES_BIRTHDAY,
-  TYPES_OTHER,
-} from "@/i18n/tokens";
+import { FIELDS, RECURRENCE, TYPES } from "@/i18n/tokens";
 import { Translate } from "@/i18n/translate";
 import { useId } from "react";
 import {
@@ -46,7 +32,7 @@ export function EventFormFields({
     <fieldset disabled={disabled} className="space-y-6">
       <div>
         <label htmlFor={`${id}-name`} className="mb-2 block font-medium">
-          <Translate token={FIELDS_NAME} />
+          <Translate token={FIELDS.NAME} />
         </label>
         <Input
           id={`${id}-name`}
@@ -60,7 +46,7 @@ export function EventFormFields({
 
       <div>
         <label htmlFor={`${id}-description`} className="mb-2 block font-medium">
-          <Translate token={FIELDS_DESCRIPTION} />
+          <Translate token={FIELDS.DESCRIPTION} />
         </label>
         <Textarea
           id={`${id}-description`}
@@ -72,13 +58,13 @@ export function EventFormFields({
 
       <fieldset>
         <legend className="mb-2 font-medium">
-          <Translate token={FIELDS_EVENT_DATE} />
+          <Translate token={FIELDS.EVENT.DATE} />
         </legend>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <div>
             <label htmlFor={`${id}-day`} className="mb-2 block text-sm">
-              <Translate token={FIELDS_DAY} />
+              <Translate token={FIELDS.DAY} />
             </label>
             <Input
               id={`${id}-day`}
@@ -94,7 +80,7 @@ export function EventFormFields({
 
           <div>
             <label htmlFor={`${id}-month`} className="mb-2 block text-sm">
-              <Translate token={FIELDS_MONTH} />
+              <Translate token={FIELDS.MONTH} />
             </label>
             <Input
               id={`${id}-month`}
@@ -110,7 +96,7 @@ export function EventFormFields({
 
           <div>
             <label htmlFor={`${id}-year`} className="mb-2 block text-sm">
-              <Translate token={FIELDS_YEAR} />
+              <Translate token={FIELDS.YEAR} />
             </label>
             <Input
               id={`${id}-year`}
@@ -125,21 +111,21 @@ export function EventFormFields({
 
       <div>
         <label htmlFor={`${id}-type`} className="mb-2 block font-medium">
-          <Translate token={FIELDS_TYPE} />
+          <Translate token={FIELDS.TYPE} />
         </label>
         <Select id={`${id}-type`} name="type" defaultValue={initialValues.type}>
           <option value="birthday">
-            <Translate token={TYPES_BIRTHDAY} />
+            <Translate token={TYPES.BIRTHDAY} />
           </option>
           <option value="other">
-            <Translate token={TYPES_OTHER} />
+            <Translate token={TYPES.OTHER} />
           </option>
         </Select>
       </div>
 
       <div>
         <label htmlFor={`${id}-recurrence`} className="mb-2 block font-medium">
-          <Translate token={FIELDS_RECURRENCE} />
+          <Translate token={FIELDS.RECURRENCE} />
         </label>
         <Select
           id={`${id}-recurrence`}
@@ -147,10 +133,10 @@ export function EventFormFields({
           defaultValue={initialValues.recurrence}
         >
           <option value="yearly">
-            <Translate token={RECURRENCE_YEARLY} />
+            <Translate token={RECURRENCE.YEARLY} />
           </option>
           <option value="none">
-            <Translate token={RECURRENCE_NONE} />
+            <Translate token={RECURRENCE.NONE} />
           </option>
         </Select>
       </div>
@@ -158,7 +144,7 @@ export function EventFormFields({
       <label className="flex cursor-pointer items-center gap-3">
         <Checkbox name="isActive" defaultChecked={initialValues.isActive} />
         <span>
-          <Translate token={FIELDS_ACTIVE} />
+          <Translate token={FIELDS.ACTIVE} />
         </span>
       </label>
     </fieldset>

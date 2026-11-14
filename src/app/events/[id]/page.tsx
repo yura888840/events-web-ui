@@ -1,4 +1,4 @@
-import { EVENTS_BACK, EVENTS_EDIT } from "@/i18n/tokens";
+import { EVENTS } from "@/i18n/tokens";
 import { Translate } from "@/i18n/translate";
 import { ButtonLink } from "@/components/ui/button";
 import { notFound } from "next/navigation";
@@ -25,7 +25,7 @@ export default async function EventEditPage({ params }: EditEventPageProps) {
     <main className="min-h-screen bg-white px-6 py-12 text-gray-900">
       <div className="mx-auto max-w-2xl">
         <h1 className="mb-6 text-2xl font-semibold">
-          <Translate token={EVENTS_EDIT} />
+          <Translate token={EVENTS.EDIT} />
         </h1>
 
         <div
@@ -34,7 +34,7 @@ export default async function EventEditPage({ params }: EditEventPageProps) {
         >
           <ButtonLink href="/events">
             <span aria-hidden="true">←</span>
-            <Translate token={EVENTS_BACK} />
+            <Translate token={EVENTS.BACK} />
           </ButtonLink>
         </div>
 
