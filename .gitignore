@@ -42,3 +42,6 @@ next-env.d.ts
 
 # Storybook build output
 /storybook-static
+
+# Compiled localization tests
+/.i18n-test

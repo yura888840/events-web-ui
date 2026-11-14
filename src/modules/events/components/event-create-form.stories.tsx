@@ -1,3 +1,4 @@
+import { t } from "@/i18n";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
 import EventCreateForm from "./event-create-form";
@@ -24,7 +25,9 @@ export const Default: Story = {};
 export const ValidationErrors: Story = {
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
-    await userEvent.click(canvas.getByRole("button", { name: "Создать" }));
+    await userEvent.click(
+      canvas.getByRole("button", { name: t("form.create") }),
+    );
     await expect(canvas.getByRole("alert")).toBeVisible();
     await expect(args.apiClient!.createEvent).not.toHaveBeenCalled();
   },
@@ -32,10 +35,15 @@ export const ValidationErrors: Story = {
 export const Saved: Story = {
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
-    await userEvent.type(canvas.getByLabelText("Название"), "Team meeting");
-    await userEvent.type(canvas.getByLabelText("День"), "12");
-    await userEvent.type(canvas.getByLabelText("Месяц"), "11");
-    await userEvent.click(canvas.getByRole("button", { name: "Создать" }));
+    await userEvent.type(
+      canvas.getByLabelText(t("fields.name")),
+      "Team meeting",
+    );
+    await userEvent.type(canvas.getByLabelText(t("fields.day")), "12");
+    await userEvent.type(canvas.getByLabelText(t("fields.month")), "11");
+    await userEvent.click(
+      canvas.getByRole("button", { name: t("form.create") }),
+    );
     await expect(await canvas.findByRole("status")).toBeVisible();
     await expect(args.apiClient!.createEvent).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -45,7 +53,7 @@ export const Saved: Story = {
         isActive: true,
       }),
     );
-    await expect(canvas.getByLabelText("Название")).toHaveValue("");
+    await expect(canvas.getByLabelText(t("fields.name"))).toHaveValue("");
   },
 };
 export const ApiFailure: Story = {
@@ -59,13 +67,20 @@ export const ApiFailure: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await userEvent.type(canvas.getByLabelText("Название"), "Team meeting");
-    await userEvent.type(canvas.getByLabelText("День"), "12");
-    await userEvent.type(canvas.getByLabelText("Месяц"), "11");
-    await userEvent.click(canvas.getByRole("button", { name: "Создать" }));
+    await userEvent.type(
+      canvas.getByLabelText(t("fields.name")),
+      "Team meeting",
+    );
+    await userEvent.type(canvas.getByLabelText(t("fields.day")), "12");
+    await userEvent.type(canvas.getByLabelText(t("fields.month")), "11");
+    await userEvent.click(
+      canvas.getByRole("button", { name: t("form.create") }),
+    );
     await expect(await canvas.findByRole("alert")).toHaveTextContent(
       "Сервис недоступен",
     );
-    await expect(canvas.getByLabelText("Название")).toHaveValue("Team meeting");
+    await expect(canvas.getByLabelText(t("fields.name"))).toHaveValue(
+      "Team meeting",
+    );
   },
 };

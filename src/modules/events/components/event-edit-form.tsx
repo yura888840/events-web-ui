@@ -1,5 +1,7 @@
 "use client";
 
+import { t } from "@/i18n";
+import { validationMessage } from "@/i18n/validation";
 import { Button, ButtonLink } from "@/components/ui/button";
 import { FormFeedback } from "@/components/ui/form-feedback";
 import { EventFormFields } from "./event-form-fields";
@@ -56,11 +58,7 @@ export default function EventEditForm({
     const result = updateEventDtoSchema.safeParse(input);
 
     if (!result.success) {
-      setErrors(
-        result.error.issues.map(
-          (issue) => `${issue.path.join(".")}: ${issue.message}`,
-        ),
-      );
+      setErrors(result.error.issues.map((issue) => validationMessage(issue)));
       return;
     }
 
@@ -72,7 +70,7 @@ export default function EventEditForm({
       await apiClient.updateEvent(eventId, dto);
       setIsSaved(true);
     } catch (error) {
-      setErrors([error instanceof Error ? error.message : "Cann't save event"]);
+      setErrors([error instanceof Error ? error.message : t("errors.save")]);
     } finally {
       setIsSaving(false);
     }
@@ -84,16 +82,16 @@ export default function EventEditForm({
 
       <FormFeedback
         errors={errors}
-        success={isSaved ? "Изменения сохранены в памяти мока." : undefined}
+        success={isSaved ? t("form.saved") : undefined}
       />
 
       <div className="flex items-center gap-3 border-t border-gray-200 pt-6">
         <Button variant="submit" type="submit" disabled={isSaving}>
-          {isSaving ? "Сохранение..." : "Сохранить"}
+          {isSaving ? t("form.saving") : t("common.save")}
         </Button>
 
         <ButtonLink variant="secondary" href="/events">
-          Отмена
+          {t("common.cancel")}
         </ButtonLink>
       </div>
     </form>

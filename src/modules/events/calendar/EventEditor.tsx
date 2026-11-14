@@ -1,5 +1,6 @@
 "use client";
 
+import { t } from "@/i18n";
 import { useState, type FormEvent } from "react";
 import type { CalendarEvent } from "@/components/events-calendar/EventsCalendar";
 
@@ -13,11 +14,21 @@ type Props = {
 export function EventEditor({ date, event, onSave, onCancel }: Props) {
   const [name, setName] = useState(event?.name ?? "");
   const [description, setDescription] = useState(event?.description ?? "");
-  const [type, setType] = useState<CalendarEvent["type"]>(event?.type ?? "other");
-  const [category, setCategory] = useState<"personal" | "work">(event?.category ?? "personal");
-  const [recurrence, setRecurrence] = useState<CalendarEvent["recurrence"]>(event?.recurrence ?? "none");
+  const [type, setType] = useState<CalendarEvent["type"]>(
+    event?.type ?? "other",
+  );
+  const [category, setCategory] = useState<"personal" | "work">(
+    event?.category ?? "personal",
+  );
+  const [recurrence, setRecurrence] = useState<CalendarEvent["recurrence"]>(
+    event?.recurrence ?? "none",
+  );
   const [day, setDay] = useState(
-    [event?.year ?? date.getFullYear(), String(event?.month ?? date.getMonth() + 1).padStart(2, "0"), String(event?.day ?? date.getDate()).padStart(2, "0")].join("-")
+    [
+      event?.year ?? date.getFullYear(),
+      String(event?.month ?? date.getMonth() + 1).padStart(2, "0"),
+      String(event?.day ?? date.getDate()).padStart(2, "0"),
+    ].join("-"),
   );
   const [time, setTime] = useState(event?.time ?? "");
   const [isActive, setIsActive] = useState(event?.isActive ?? true);
@@ -28,9 +39,15 @@ export function EventEditor({ date, event, onSave, onCancel }: Props) {
     const parts = day.split("-").map(Number);
     const [year, month, dateNumber] = parts;
     const check = new Date(year, month - 1, dateNumber);
-    if (!name.trim() || !day || !year || check.getFullYear() !== year ||
-      check.getMonth() + 1 !== month || check.getDate() !== dateNumber) {
-      setError("Укажите название и корректную дату.");
+    if (
+      !name.trim() ||
+      !day ||
+      !year ||
+      check.getFullYear() !== year ||
+      check.getMonth() + 1 !== month ||
+      check.getDate() !== dateNumber
+    ) {
+      setError(t("editor.invalid"));
       return;
     }
     onSave({
@@ -50,21 +67,100 @@ export function EventEditor({ date, event, onSave, onCancel }: Props) {
 
   return (
     <form onSubmit={submit} className="calendar-editor">
-      <h2>{event ? "Редактировать событие" : "Новое событие"}</h2>
-      <label>Название <input autoFocus required maxLength={160} value={name} onChange={(e) => setName(e.target.value)} /></label>
-      <label>Описание <textarea rows={3} value={description} onChange={(e) => setDescription(e.target.value)} /></label>
+      <h2>{event ? t("editor.edit") : t("editor.new")}</h2>
+      <label>
+        {t("fields.name")}{" "}
+        <input
+          autoFocus
+          required
+          maxLength={160}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </label>
+      <label>
+        {t("fields.description")}{" "}
+        <textarea
+          rows={3}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+      </label>
       <div className="editor-fields">
-        <label>Дата <input required type="date" value={day} onChange={(e) => setDay(e.target.value)} /></label>
-        <label>Время <input type="time" value={time} onChange={(e) => setTime(e.target.value)} /></label>
+        <label>
+          {t("fields.date")}{" "}
+          <input
+            required
+            type="date"
+            value={day}
+            onChange={(e) => setDay(e.target.value)}
+          />
+        </label>
+        <label>
+          {t("fields.time")}{" "}
+          <input
+            type="time"
+            value={time}
+            onChange={(e) => setTime(e.target.value)}
+          />
+        </label>
       </div>
       <div className="editor-fields">
-        <label>Тип <select value={type} onChange={(e) => setType(e.target.value as CalendarEvent["type"])}><option value="other">Событие</option><option value="birthday">День рождения</option></select></label>
-        <label>Календарь <select value={category} disabled={type === "birthday"} onChange={(e) => setCategory(e.target.value as "personal" | "work")}><option value="personal">Личное</option><option value="work">Работа</option></select></label>
+        <label>
+          {t("fields.shortType")}{" "}
+          <select
+            value={type}
+            onChange={(e) => setType(e.target.value as CalendarEvent["type"])}
+          >
+            <option value="other">{t("types.event")}</option>
+            <option value="birthday">{t("types.birthday")}</option>
+          </select>
+        </label>
+        <label>
+          {t("calendar.title")}{" "}
+          <select
+            value={category}
+            disabled={type === "birthday"}
+            onChange={(e) => setCategory(e.target.value as "personal" | "work")}
+          >
+            <option value="personal">{t("categories.personal")}</option>
+            <option value="work">{t("categories.work")}</option>
+          </select>
+        </label>
       </div>
-      <label>Повторение <select value={recurrence} onChange={(e) => setRecurrence(e.target.value as CalendarEvent["recurrence"])}><option value="none">Без повтора</option><option value="yearly">Каждый год</option></select></label>
-      <label className="editor-check"><input type="checkbox" checked={isActive} onChange={(e) => setIsActive(e.target.checked)} />Активное событие</label>
-      {error && <p role="alert" className="editor-error">{error}</p>}
-      <div className="editor-actions"><button className="editor-cancel" type="button" onClick={onCancel}>Отмена</button><button className="editor-submit" type="submit">Сохранить</button></div>
+      <label>
+        {t("fields.recurrence")}{" "}
+        <select
+          value={recurrence}
+          onChange={(e) =>
+            setRecurrence(e.target.value as CalendarEvent["recurrence"])
+          }
+        >
+          <option value="none">{t("editor.noRepeat")}</option>
+          <option value="yearly">{t("editor.yearly")}</option>
+        </select>
+      </label>
+      <label className="editor-check">
+        <input
+          type="checkbox"
+          checked={isActive}
+          onChange={(e) => setIsActive(e.target.checked)}
+        />
+        {t("editor.active")}
+      </label>
+      {error && (
+        <p role="alert" className="editor-error">
+          {error}
+        </p>
+      )}
+      <div className="editor-actions">
+        <button className="editor-cancel" type="button" onClick={onCancel}>
+          {t("common.cancel")}
+        </button>
+        <button className="editor-submit" type="submit">
+          {t("common.save")}
+        </button>
+      </div>
     </form>
   );
 }

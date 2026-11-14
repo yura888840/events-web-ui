@@ -1,4 +1,5 @@
 "use client";
+import { t } from "@/i18n";
 import { useId } from "react";
 import {
   Input,
@@ -30,7 +31,7 @@ export function EventFormFields({
     <fieldset disabled={disabled} className="space-y-6">
       <div>
         <label htmlFor={`${id}-name`} className="mb-2 block font-medium">
-          Название
+          {t("fields.name")}
         </label>
         <Input
           id={`${id}-name`}
@@ -44,7 +45,7 @@ export function EventFormFields({
 
       <div>
         <label htmlFor={`${id}-description`} className="mb-2 block font-medium">
-          Описание
+          {t("fields.description")}
         </label>
         <Textarea
           id={`${id}-description`}
@@ -55,12 +56,12 @@ export function EventFormFields({
       </div>
 
       <fieldset>
-        <legend className="mb-2 font-medium">Дата события</legend>
+        <legend className="mb-2 font-medium">{t("fields.eventDate")}</legend>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <div>
             <label htmlFor={`${id}-day`} className="mb-2 block text-sm">
-              День
+              {t("fields.day")}
             </label>
             <Input
               id={`${id}-day`}
@@ -76,7 +77,7 @@ export function EventFormFields({
 
           <div>
             <label htmlFor={`${id}-month`} className="mb-2 block text-sm">
-              Месяц
+              {t("fields.month")}
             </label>
             <Input
               id={`${id}-month`}
@@ -92,7 +93,7 @@ export function EventFormFields({
 
           <div>
             <label htmlFor={`${id}-year`} className="mb-2 block text-sm">
-              Год (необязательно)
+              {t("fields.year")}
             </label>
             <Input
               id={`${id}-year`}
@@ -107,31 +108,31 @@ export function EventFormFields({
 
       <div>
         <label htmlFor={`${id}-type`} className="mb-2 block font-medium">
-          Тип события
+          {t("fields.type")}
         </label>
         <Select id={`${id}-type`} name="type" defaultValue={initialValues.type}>
-          <option value="birthday">День рождения</option>
-          <option value="other">Другое</option>
+          <option value="birthday">{t("types.birthday")}</option>
+          <option value="other">{t("types.other")}</option>
         </Select>
       </div>
 
       <div>
         <label htmlFor={`${id}-recurrence`} className="mb-2 block font-medium">
-          Повторение
+          {t("fields.recurrence")}
         </label>
         <Select
           id={`${id}-recurrence`}
           name="recurrence"
           defaultValue={initialValues.recurrence}
         >
-          <option value="yearly">Ежегодно</option>
-          <option value="none">Без повторения</option>
+          <option value="yearly">{t("recurrence.yearly")}</option>
+          <option value="none">{t("recurrence.none")}</option>
         </Select>
       </div>
 
       <label className="flex cursor-pointer items-center gap-3">
         <Checkbox name="isActive" defaultChecked={initialValues.isActive} />
-        <span>Событие активно</span>
+        <span>{t("fields.active")}</span>
       </label>
     </fieldset>
   );

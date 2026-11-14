@@ -1,5 +1,7 @@
 "use client";
 
+import { t } from "@/i18n";
+import { validationMessage } from "@/i18n/validation";
 import { Button, ButtonLink } from "@/components/ui/button";
 import { FormFeedback } from "@/components/ui/form-feedback";
 import { EventFormFields } from "./event-form-fields";
@@ -58,11 +60,7 @@ export default function EventCreateForm({
     const result = createEventDtoSchema.safeParse(input);
 
     if (!result.success) {
-      setErrors(
-        result.error.issues.map(
-          (issue) => `${issue.path.join(".")}: ${issue.message}`,
-        ),
-      );
+      setErrors(result.error.issues.map((issue) => validationMessage(issue)));
       return;
     }
 
@@ -75,9 +73,7 @@ export default function EventCreateForm({
       form.reset();
       setIsSaved(true);
     } catch (error) {
-      setErrors([
-        error instanceof Error ? error.message : "Не удалось создать событие",
-      ]);
+      setErrors([error instanceof Error ? error.message : t("errors.create")]);
     } finally {
       setIsSaving(false);
     }
@@ -89,16 +85,16 @@ export default function EventCreateForm({
 
       <FormFeedback
         errors={errors}
-        success={isSaved ? "Событие создано в памяти мока." : undefined}
+        success={isSaved ? t("form.created") : undefined}
       />
 
       <div className="flex items-center gap-3 border-t border-gray-200 pt-6">
         <Button variant="submit" type="submit" disabled={isSaving}>
-          {isSaving ? "Создание..." : "Создать"}
+          {isSaving ? t("form.creating") : t("form.create")}
         </Button>
 
         <ButtonLink variant="secondary" href="/events">
-          Отмена
+          {t("common.cancel")}
         </ButtonLink>
       </div>
     </form>

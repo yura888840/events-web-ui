@@ -1,3 +1,4 @@
+import { t } from "@/i18n";
 import { ButtonLink } from "@/components/ui/button";
 import { notFound } from "next/navigation";
 
@@ -22,7 +23,7 @@ export default async function EventEditPage({ params }: EditEventPageProps) {
   return (
     <main className="min-h-screen bg-white px-6 py-12 text-gray-900">
       <div className="mx-auto max-w-2xl">
-        <h1 className="mb-6 text-2xl font-semibold">Edit event</h1>
+        <h1 className="mb-6 text-2xl font-semibold">{t("events.edit")}</h1>
 
         <div
           className="mb-6 flex flex-wrap items-center justify-end
@@ -30,7 +31,7 @@ export default async function EventEditPage({ params }: EditEventPageProps) {
         >
           <ButtonLink href="/events">
             <span aria-hidden="true">←</span>
-            Back to list
+            {t("events.back")}
           </ButtonLink>
         </div>
 

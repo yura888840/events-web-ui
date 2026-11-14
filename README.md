@@ -86,3 +86,33 @@ can produce a different checksum; when intentionally updating it, regenerate the
 lockfile using `npm install ../events-contracts/yura888840-events-contracts-0.1.0.tgz`.
 The API client infers `UpdateEventInput` from `updateEventDtoSchema` because the
 current contracts package incorrectly aliases `UpdateEventDto` to the full event.
+
+## Localization
+
+Application copy lives in `src/i18n/messages/ru.json` and `en.json`, grouped by
+semantic key prefixes. Russian is the default. Set `NEXT_PUBLIC_LOCALE=en` before
+starting development, building the app, or running Storybook for English:
+
+```bash
+NEXT_PUBLIC_LOCALE=en npm run dev
+NEXT_PUBLIC_LOCALE=en npm run build
+NEXT_PUBLIC_LOCALE=en npm run storybook
+```
+
+The locale is a build-time setting: rebuild to change a deployed app's language.
+Unsupported values fall back to Russian. Existing route URLs are unchanged.
+Server components, client components, metadata, and the HTML `lang` attribute use
+the same setting; no provider or extra runtime dependency is required.
+
+Use `t("fields.name")` from `@/i18n` for copy. Add matching keys to **both** JSON
+files. Use named placeholders for complete phrases, for example
+`t("events.editLabel", { name: event.name })`; React escapes the rendered text.
+Use `eventCount(count)` for pluralized totals and `formatDate` for dates. Month
+and weekday names come from `Intl`, with Monday remaining the first calendar day.
+Schema errors are mapped to localized field messages by `validationMessage`.
+API-provided error messages and user-authored event names/descriptions (including
+demo fixtures) are content, not translation keys. Storybook catalog titles and
+demo-only control copy are development documentation, not application copy.
+
+Run `npm run test:i18n` and `NEXT_PUBLIC_LOCALE=en npm run test:i18n` to check
+catalog parity, placeholders, plural forms, validation, and date headings.

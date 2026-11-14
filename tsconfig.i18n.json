@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "rootDir": "src/i18n",
+    "outDir": ".i18n-test",
+    "noEmit": false,
+    "incremental": false,
+    "plugins": []
+  },
+  "include": ["src/i18n/**/*.ts"],
+  "exclude": ["node_modules"]
+}

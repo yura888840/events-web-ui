@@ -10,7 +10,8 @@
     "format": "prettier --write \"src/**/*.ts\"",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "typecheck": "next typegen && tsc --noEmit"
+    "typecheck": "next typegen && tsc --noEmit",
+    "test:i18n": "tsc -p tsconfig.i18n.json && node --test tests/i18n.test.mjs"
   },
   "dependencies": {
     "@yura888840/events-contracts": "file:../events-contracts/yura888840-events-contracts-0.1.0.tgz",

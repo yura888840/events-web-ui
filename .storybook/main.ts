@@ -7,6 +7,12 @@ const config: StorybookConfig = {
   framework: "@storybook/nextjs-vite",
   staticDirs: ["../public"],
   async viteFinal(config) {
+    config.define = {
+      ...config.define,
+      "process.env.NEXT_PUBLIC_LOCALE": JSON.stringify(
+        process.env.NEXT_PUBLIC_LOCALE ?? "ru",
+      ),
+    };
     config.plugins = [...(config.plugins ?? []), tailwindcss()];
     return config;
   },

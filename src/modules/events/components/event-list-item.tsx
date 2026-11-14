@@ -1,3 +1,4 @@
+import { t } from "@/i18n";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 
@@ -24,15 +25,15 @@ export function EventListItem({
       <div className="flex shrink-0 items-center gap-2">
         <Switch
           checked={event.isActive}
-          aria-label={`Активность события «${event.name}»`}
-          title={event.isActive ? "Деактивировать" : "Активировать"}
+          aria-label={t("events.toggleLabel", { name: event.name })}
+          title={event.isActive ? t("events.deactivate") : t("events.activate")}
           onCheckedChange={() => onToggle()}
         />
         <Button
           variant="icon"
           type="button"
-          aria-label={`Редактировать событие «${event.name}»`}
-          title="Edit"
+          aria-label={t("events.editLabel", { name: event.name })}
+          title={t("common.edit")}
           onClick={() => onEdit()}
         >
           <svg
@@ -52,8 +53,8 @@ export function EventListItem({
         <Button
           variant="icon"
           type="button"
-          aria-label={`Delete event «${event.name}»`}
-          title="Удалить"
+          aria-label={t("events.deleteLabel", { name: event.name })}
+          title={t("common.delete")}
           onClick={() => onDelete()}
         >
           <svg
