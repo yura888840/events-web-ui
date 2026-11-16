@@ -1,3 +1,5 @@
+import { COMMON, FIELDS, FORM } from "@/i18n/tokens";
+import { translate } from "@/i18n";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
 import EventEditForm from "./event-edit-form";
@@ -35,9 +37,14 @@ export const Default: Story = {};
 export const Saved: Story = {
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
-    await userEvent.clear(canvas.getByLabelText("Название"));
-    await userEvent.type(canvas.getByLabelText("Название"), "Updated event");
-    await userEvent.click(canvas.getByRole("button", { name: "Сохранить" }));
+    await userEvent.clear(canvas.getByLabelText(translate(FIELDS.NAME)));
+    await userEvent.type(
+      canvas.getByLabelText(translate(FIELDS.NAME)),
+      "Updated event",
+    );
+    await userEvent.click(
+      canvas.getByRole("button", { name: translate(COMMON.SAVE) }),
+    );
     await expect(await canvas.findByRole("status")).toBeVisible();
     await expect(args.apiClient!.updateEvent).toHaveBeenCalledWith(
       "1",
@@ -59,10 +66,12 @@ export const Saving: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await userEvent.click(canvas.getByRole("button", { name: "Сохранить" }));
+    await userEvent.click(
+      canvas.getByRole("button", { name: translate(COMMON.SAVE) }),
+    );
     await expect(
-      canvas.getByRole("button", { name: "Сохранение..." }),
+      canvas.getByRole("button", { name: translate(FORM.SAVING) }),
     ).toBeDisabled();
-    await expect(canvas.getByLabelText("Название")).toBeDisabled();
+    await expect(canvas.getByLabelText(translate(FIELDS.NAME))).toBeDisabled();
   },
 };

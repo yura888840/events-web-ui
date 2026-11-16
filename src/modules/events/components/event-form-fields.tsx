@@ -1,4 +1,6 @@
 "use client";
+import { FIELDS, RECURRENCE, TYPES } from "@/i18n/tokens";
+import { Translate } from "@/i18n/translate";
 import { useId } from "react";
 import {
   Input,
@@ -30,7 +32,7 @@ export function EventFormFields({
     <fieldset disabled={disabled} className="space-y-6">
       <div>
         <label htmlFor={`${id}-name`} className="mb-2 block font-medium">
-          Название
+          <Translate token={FIELDS.NAME} />
         </label>
         <Input
           id={`${id}-name`}
@@ -44,7 +46,7 @@ export function EventFormFields({
 
       <div>
         <label htmlFor={`${id}-description`} className="mb-2 block font-medium">
-          Описание
+          <Translate token={FIELDS.DESCRIPTION} />
         </label>
         <Textarea
           id={`${id}-description`}
@@ -55,12 +57,14 @@ export function EventFormFields({
       </div>
 
       <fieldset>
-        <legend className="mb-2 font-medium">Дата события</legend>
+        <legend className="mb-2 font-medium">
+          <Translate token={FIELDS.EVENT.DATE} />
+        </legend>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <div>
             <label htmlFor={`${id}-day`} className="mb-2 block text-sm">
-              День
+              <Translate token={FIELDS.DAY} />
             </label>
             <Input
               id={`${id}-day`}
@@ -76,7 +80,7 @@ export function EventFormFields({
 
           <div>
             <label htmlFor={`${id}-month`} className="mb-2 block text-sm">
-              Месяц
+              <Translate token={FIELDS.MONTH} />
             </label>
             <Input
               id={`${id}-month`}
@@ -92,7 +96,7 @@ export function EventFormFields({
 
           <div>
             <label htmlFor={`${id}-year`} className="mb-2 block text-sm">
-              Год (необязательно)
+              <Translate token={FIELDS.YEAR} />
             </label>
             <Input
               id={`${id}-year`}
@@ -107,31 +111,41 @@ export function EventFormFields({
 
       <div>
         <label htmlFor={`${id}-type`} className="mb-2 block font-medium">
-          Тип события
+          <Translate token={FIELDS.TYPE} />
         </label>
         <Select id={`${id}-type`} name="type" defaultValue={initialValues.type}>
-          <option value="birthday">День рождения</option>
-          <option value="other">Другое</option>
+          <option value="birthday">
+            <Translate token={TYPES.BIRTHDAY} />
+          </option>
+          <option value="other">
+            <Translate token={TYPES.OTHER} />
+          </option>
         </Select>
       </div>
 
       <div>
         <label htmlFor={`${id}-recurrence`} className="mb-2 block font-medium">
-          Повторение
+          <Translate token={FIELDS.RECURRENCE} />
         </label>
         <Select
           id={`${id}-recurrence`}
           name="recurrence"
           defaultValue={initialValues.recurrence}
         >
-          <option value="yearly">Ежегодно</option>
-          <option value="none">Без повторения</option>
+          <option value="yearly">
+            <Translate token={RECURRENCE.YEARLY} />
+          </option>
+          <option value="none">
+            <Translate token={RECURRENCE.NONE} />
+          </option>
         </Select>
       </div>
 
       <label className="flex cursor-pointer items-center gap-3">
         <Checkbox name="isActive" defaultChecked={initialValues.isActive} />
-        <span>Событие активно</span>
+        <span>
+          <Translate token={FIELDS.ACTIVE} />
+        </span>
       </label>
     </fieldset>
   );

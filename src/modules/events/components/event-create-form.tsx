@@ -1,5 +1,9 @@
 "use client";
 
+import { COMMON, ERRORS, FORM } from "@/i18n/tokens";
+import { Translate } from "@/i18n/translate";
+import { translate } from "@/i18n";
+import { validationMessage } from "@/i18n/validation";
 import { Button, ButtonLink } from "@/components/ui/button";
 import { FormFeedback } from "@/components/ui/form-feedback";
 import { EventFormFields } from "./event-form-fields";
@@ -58,11 +62,7 @@ export default function EventCreateForm({
     const result = createEventDtoSchema.safeParse(input);
 
     if (!result.success) {
-      setErrors(
-        result.error.issues.map(
-          (issue) => `${issue.path.join(".")}: ${issue.message}`,
-        ),
-      );
+      setErrors(result.error.issues.map((issue) => validationMessage(issue)));
       return;
     }
 
@@ -76,7 +76,7 @@ export default function EventCreateForm({
       setIsSaved(true);
     } catch (error) {
       setErrors([
-        error instanceof Error ? error.message : "Не удалось создать событие",
+        error instanceof Error ? error.message : translate(ERRORS.CREATE),
       ]);
     } finally {
       setIsSaving(false);
@@ -89,16 +89,20 @@ export default function EventCreateForm({
 
       <FormFeedback
         errors={errors}
-        success={isSaved ? "Событие создано в памяти мока." : undefined}
+        success={isSaved ? translate(FORM.CREATED) : undefined}
       />
 
       <div className="flex items-center gap-3 border-t border-gray-200 pt-6">
         <Button variant="submit" type="submit" disabled={isSaving}>
-          {isSaving ? "Создание..." : "Создать"}
+          {isSaving ? (
+            <Translate token={FORM.CREATING} />
+          ) : (
+            <Translate token={FORM.CREATE} />
+          )}
         </Button>
 
         <ButtonLink variant="secondary" href="/events">
-          Отмена
+          <Translate token={COMMON.CANCEL} />
         </ButtonLink>
       </div>
     </form>

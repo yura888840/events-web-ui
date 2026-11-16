@@ -1,3 +1,5 @@
+import { EVENTS } from "@/i18n/tokens";
+import { translate } from "@/i18n";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
 import { EventListItem } from "./event-list-item";
@@ -26,10 +28,16 @@ export const Active: Story = {
     await userEvent.click(canvas.getByRole("switch"));
     await expect(args.onToggle).toHaveBeenCalledOnce();
     await userEvent.click(
-      canvas.getByRole("button", { name: /Редактировать/ }),
+      canvas.getByRole("button", {
+        name: translate(EVENTS.LABEL.EDIT, { name: args.event.name }),
+      }),
     );
     await expect(args.onEdit).toHaveBeenCalledOnce();
-    await userEvent.click(canvas.getByRole("button", { name: /Delete event/ }));
+    await userEvent.click(
+      canvas.getByRole("button", {
+        name: translate(EVENTS.LABEL.DELETE, { name: args.event.name }),
+      }),
+    );
     await expect(args.onDelete).toHaveBeenCalledOnce();
   },
 };

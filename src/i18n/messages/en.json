@@ -1,0 +1,175 @@
+{
+  "COMMON": {
+    "CANCEL": "Cancel",
+    "SAVE": "Save",
+    "CLOSE": "Close",
+    "EDIT": "Edit",
+    "DELETE": "Delete"
+  },
+  "EVENTS": {
+    "TITLE": "Events",
+    "ADD": "Add new",
+    "EMPTY": "No events yet.",
+    "EDIT": "Edit event",
+    "NEW": "New event",
+    "BACK": "Back to list",
+    "ACTIVATE": "Activate",
+    "DEACTIVATE": "Deactivate",
+    "LABEL": {
+      "TOGGLE": "Activity of event “{name}”",
+      "EDIT": "Edit event “{name}”",
+      "DELETE": "Delete event “{name}”"
+    }
+  },
+  "FIELDS": {
+    "NAME": "Name",
+    "DESCRIPTION": "Description",
+    "EVENT": {
+      "DATE": "Event date"
+    },
+    "DAY": "Day",
+    "MONTH": "Month",
+    "YEAR": "Year (optional)",
+    "TYPE": "Event type",
+    "RECURRENCE": "Recurrence",
+    "ACTIVE": "Event is active",
+    "DATE": "Date",
+    "TIME": "Time",
+    "SHORT": {
+      "TYPE": "Type"
+    },
+    "IS": {
+      "ACTIVE": "Active"
+    },
+    "VALUE": "Value"
+  },
+  "TYPES": {
+    "BIRTHDAY": "Birthday",
+    "OTHER": "Other",
+    "EVENT": "Event"
+  },
+  "RECURRENCE": {
+    "YEARLY": "Yearly",
+    "NONE": "Does not repeat"
+  },
+  "FORM": {
+    "CREATE": "Create",
+    "CREATING": "Creating...",
+    "SAVING": "Saving...",
+    "CREATED": "Event created in mock storage.",
+    "SAVED": "Changes saved in mock storage."
+  },
+  "ERRORS": {
+    "CREATE": "Could not create the event.",
+    "SAVE": "Could not save the event.",
+    "NOT": {
+      "FOUND": "Event “{id}” not found"
+    }
+  },
+  "EDITOR": {
+    "INVALID": "Enter a name and a valid date.",
+    "EDIT": "Edit event",
+    "NEW": "New event",
+    "NO": {
+      "REPEAT": "Does not repeat"
+    },
+    "YEARLY": "Every year",
+    "ACTIVE": "Active event"
+  },
+  "CALENDAR": {
+    "TITLE": "Calendar",
+    "TAGLINE": "Your time. Your events.",
+    "SPACE": "Personal space",
+    "WORKSPACE": "WORKSPACE",
+    "MONTH": {
+      "PREVIOUS": "Previous month",
+      "NEXT": "Next month",
+      "CHOOSE": "Choose month"
+    },
+    "MY": {
+      "CALENDARS": "MY CALENDARS"
+    },
+    "NOTE": {
+      "TITLE": "Keep what matters close",
+      "BODY": "Meetings, birthdays, and your plans in one calendar."
+    },
+    "DEMO": "Demo · local events",
+    "EYEBROW": "PLANS AND IMPORTANT DATES",
+    "ADD": {
+      "LABEL": "Add event",
+      "ON": {
+        "DATE": "Add event: {date}"
+      }
+    },
+    "SEARCH": {
+      "LABEL": "Find an event",
+      "CLEAR": "Clear search"
+    },
+    "TODAY": {
+      "LABEL": "Today",
+      "BADGE": "TODAY"
+    },
+    "PERIOD": {
+      "PREVIOUS": "Previous period",
+      "NEXT": "Next period"
+    },
+    "LIST": "List",
+    "WEEK": {
+      "LABEL": "Week",
+      "START": "The week starts on Monday"
+    },
+    "INACTIVE": {
+      "SHOW": "Show inactive events",
+      "SUFFIX": " · Inactive",
+      "LABEL": "Inactive event"
+    },
+    "YEAR": {
+      "CHOOSE": "Choose year"
+    },
+    "EMPTY": "No events in this period",
+    "ALL": {
+      "DAY": "All day"
+    },
+    "LABEL": "Events calendar",
+    "SCHEDULED": "Scheduled event",
+    "DETAILS": {
+      "HINT": "Click an event to see details",
+      "TITLE": "Event details"
+    },
+    "LOADING": "Loading events…",
+    "DIALOG": {
+      "EDIT": "Edit event",
+      "CREATE": "Create event"
+    },
+    "RECURRING": "Repeats every year",
+    "CONFIRM": {
+      "DELETE": "Delete this event?"
+    },
+    "COUNT": {
+      "ONE": "{count} event in this period",
+      "FEW": "{count} events in this period",
+      "MANY": "{count} events in this period",
+      "OTHER": "{count} events in this period"
+    }
+  },
+  "CATEGORIES": {
+    "PERSONAL": "Personal",
+    "WORK": "Work",
+    "BIRTHDAY": "Birthdays"
+  },
+  "APP": {
+    "TITLE": "Events calendar",
+    "DESCRIPTION": "Your events, birthdays, and plans in one calendar.",
+    "BRAND": "events",
+    "AVATAR": "YO"
+  },
+  "VALIDATION": {
+    "INVALID": "{field}: invalid value.",
+    "REQUIRED": "{field}: this field is required.",
+    "MINIMUM": "{field}: minimum value is {minimum}.",
+    "MAXIMUM": "{field}: maximum value is {maximum}.",
+    "NAME": {
+      "LENGTH": "Name: use at most {maximum} characters."
+    }
+  }
+}

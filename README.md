@@ -86,3 +86,51 @@ can produce a different checksum; when intentionally updating it, regenerate the
 lockfile using `npm install ../events-contracts/yura888840-events-contracts-0.1.0.tgz`.
 The API client infers `UpdateEventInput` from `updateEventDtoSchema` because the
 current contracts package incorrectly aliases `UpdateEventDto` to the full event.
+
+## Localization
+
+Application copy lives in `src/i18n/messages/en.json` and `ru.json`, using
+nested language tokens such as `EVENTS.BACK` and `CALENDAR.DIALOG.CREATE`. English is the default and the
+fallback for unsupported locale values. Set `NEXT_PUBLIC_LOCALE=ru` before
+starting development, building the app, or running Storybook for Russian:
+
+```bash
+NEXT_PUBLIC_LOCALE=ru npm run dev
+NEXT_PUBLIC_LOCALE=ru npm run build
+NEXT_PUBLIC_LOCALE=ru npm run storybook
+```
+
+The locale is a build-time setting: rebuild to change a deployed app's language.
+Existing route URLs are unchanged. Server components, client components,
+metadata, and HTML `lang` use the same setting.
+
+Use the declarative `Translate` component in JSX (React's equivalent here of a
+translation pipe):
+
+```tsx
+import { Translate } from '@/i18n/translate';
+import { EVENTS } from '@/i18n/tokens';
+
+<Translate token={EVENTS.BACK} />
+<Translate token={EVENTS.LABEL.EDIT} values={{ name: event.name }} />
+```
+
+It renders escaped text without an extra DOM element and works in both server
+and client components. For string-only APIs such as `aria-label`, placeholders,
+metadata, validation, and Storybook queries, use `translate(EVENTS.LABEL.EDIT,
+{ name: event.name })` from `@/i18n`.
+
+Add each token to `src/i18n/tokens.ts` and matching nested entries to both JSON catalogs. Token values are dot-separated paths
+(e.g. `CALENDAR.DIALOG.CREATE` resolves to `CALENDAR > DIALOG > CREATE`).
+Use named placeholders for complete phrases. Use `eventCount(count)` for plurals
+and `formatDate` for dates. Month and weekday names come from `Intl`, with Monday
+remaining the first calendar day. Schema errors are mapped to localized field
+messages by `validationMessage`.
+
+API-provided errors and user-authored event names/descriptions (including demo
+fixtures) are content, not translation tokens. Storybook catalog titles and
+demo-only control copy are development documentation, not application copy.
+
+Run `npm run test:i18n` and `NEXT_PUBLIC_LOCALE=ru npm run test:i18n` to check
+catalog/token parity, interpolation, rendered translations, plural forms,
+validation, and date headings.
